@@ -16,6 +16,7 @@ public class MainManager : MonoBehaviour
     [Range(0.1f, 1f)]
     [Tooltip("Incremental range to move")]
     public float deltaMovement = 0.1f;
+    Rigidbody2D playerRB;
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -43,7 +44,7 @@ public class MainManager : MonoBehaviour
     }
     void Start()
     {
-
+        playerRB = player.GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
@@ -67,6 +68,8 @@ public class MainManager : MonoBehaviour
                     //leftmostBorder.transform.
                 }
                 player.transform.position = pos;
+                //playerRB.linearVelocityX = -deltaMovement;
+                //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
             }
             isPressed = controls.Move.MoveRight.IsPressed();
             if (isPressed)
@@ -79,6 +82,8 @@ public class MainManager : MonoBehaviour
                     pos.x = rightmostBorder.transform.position.x;
                 }
                 player.transform.position = pos;
+                //playerRB.linearVelocityX = deltaMovement;
+                //playerRB.AddForceX(deltaMovement, ForceMode2D.Impulse);
             }
             isPressed = controls.Move.MoveUp.IsPressed();//.Gameplay.GameStart.IsPressed();
             if (isPressed)
@@ -114,6 +119,14 @@ public class MainManager : MonoBehaviour
                 }
                 player.transform.position = pos;
             }
+            //Reload the game
+            isPressed = controls.GamePlay.GameStart.IsPressed();
+            if (isPressed)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                //Reset();
+            }
+
         }
         else if (m_GameOver)
         {
