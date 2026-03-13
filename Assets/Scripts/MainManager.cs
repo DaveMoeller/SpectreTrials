@@ -22,6 +22,9 @@ public class MainManager : MonoBehaviour
     public UIDocument uiDocument;
     private Label scoreText;
     private float gameTimeInSeconds;
+    public Camera cameraMain;
+    public Camera cameraPlayer;
+    private bool cameraMainOn = true;
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -77,7 +80,10 @@ public class MainManager : MonoBehaviour
                 }
                 player.transform.position = pos;
                 //playerRB.linearVelocityX = -deltaMovement;
+                playerRB.linearVelocityX = -deltaMovement;
                 //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
+                //Vector2 newDir = new Vector2(1.0f + (1.0f * (-deltaMovement)), 0.0f);
+                //playerRB.AddForce(newDir);
             }
             isPressed = controls.Move.MoveRight.IsPressed();
             if (isPressed)
@@ -134,6 +140,27 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 //Reset();
             }
+            isPressed = controls.Camera.CameraButton.WasPressedThisFrame();
+            if (isPressed)
+            {
+                Debug.Log("Camera Toggle is pressed!");
+                if (cameraMainOn)
+                {
+                    //Set the transform of camera above player
+                    cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
+                    cameraMainOn = false;
+                    cameraMain.gameObject.SetActive(false);
+                    cameraPlayer.gameObject.SetActive(true);
+                }
+                else
+                {
+                    cameraMainOn = true;
+                    cameraPlayer.gameObject.SetActive(false);
+                    cameraMain.gameObject.SetActive(true);
+
+                }
+            }
+            cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
 
         }
         else if (m_GameOver)
