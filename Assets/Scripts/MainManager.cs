@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class MainManager : MonoBehaviour
 {
@@ -17,6 +19,9 @@ public class MainManager : MonoBehaviour
     [Tooltip("Incremental range to move")]
     public float deltaMovement = 0.1f;
     Rigidbody2D playerRB;
+    public UIDocument uiDocument;
+    private Label scoreText;
+    private float gameTimeInSeconds;
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -45,9 +50,12 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         playerRB = player.GetComponent<Rigidbody2D>();
+        scoreText = uiDocument.rootVisualElement.Q<Label>("TimeText");
     }
     private void Update()
     {
+        gameTimeInSeconds += Time.deltaTime;
+        scoreText.text = "Time: " + TimeSpan.FromSeconds(gameTimeInSeconds).ToString(@"mm\:ss");
         if (!m_Started)
         {
             // Update is called once per frame
