@@ -15,9 +15,12 @@ public class MainManager : MonoBehaviour
     public GameObject rightmostBorder;
     public GameObject bottommostBorder;
     public GameObject topmostBorder;
-    [Range(0.1f, 1f)]
+    [Range(0.1f, 1.0f)]
     [Tooltip("Incremental range to move")]
     public float deltaMovement = 0.1f;
+    [Range(0.1f, 10.0f)]
+    [Tooltip("Force to apply in direction")]
+    public float forceToApply = 1.0f;
     Rigidbody2D playerRB;
     public UIDocument uiDocument;
     private Label scoreText;
@@ -80,7 +83,7 @@ public class MainManager : MonoBehaviour
                 }
                 player.transform.position = pos;
                 //playerRB.linearVelocityX = -deltaMovement;
-                playerRB.linearVelocityX = -deltaMovement;
+                //playerRB.linearVelocityX = -deltaMovement;
                 //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
                 //Vector2 newDir = new Vector2(1.0f + (1.0f * (-deltaMovement)), 0.0f);
                 //playerRB.AddForce(newDir);
@@ -95,6 +98,7 @@ public class MainManager : MonoBehaviour
                 {
                     pos.x = rightmostBorder.transform.position.x;
                 }
+                //ToDo: Test
                 player.transform.position = pos;
                 //playerRB.linearVelocityX = deltaMovement;
                 //playerRB.AddForceX(deltaMovement, ForceMode2D.Impulse);
@@ -175,5 +179,18 @@ public class MainManager : MonoBehaviour
             //}
         }
     }
+    public void FixedUpdate()
+    {
+        bool isPressed;
+        //isPressed = controls.Move.MoveRight.WasPressedThisFrame();
+        isPressed = controls.Move.MoveRight.IsPressed();
+        if (isPressed)
+        {
+            Debug.Log("MoveRight pressed this frame!");
+            //playerRB.linearVelocityX = deltaMovement;
+            //playerRB.AddForceX(deltaMovement, ForceMode2D.Impulse);
+            //playerRB.AddForceX(forceToApply, ForceMode2D.Force);
+        }
 
+    }
 }
