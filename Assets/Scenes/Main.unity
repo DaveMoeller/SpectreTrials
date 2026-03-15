@@ -516,7 +516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &110245824
 Transform:
   m_ObjectHideFlags: 0
@@ -530,10 +530,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1381738128}
-  - {fileID: 352011127}
-  - {fileID: 1535139879}
-  - {fileID: 971664209}
   - {fileID: 1950195582}
   - {fileID: 598538043}
   - {fileID: 346125306}
@@ -1738,7 +1734,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 110245824}
+    m_TransformParent: {fileID: 1425810061}
     m_Modifications:
     - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LocalScale.x
@@ -5708,7 +5704,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 110245824}
+    m_TransformParent: {fileID: 1425810061}
     m_Modifications:
     - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LocalScale.x
@@ -7265,7 +7261,7 @@ MonoBehaviour:
   rightmostBorder: {fileID: 598538042}
   bottommostBorder: {fileID: 384269065}
   topmostBorder: {fileID: 346125305}
-  deltaMovement: 1
+  deltaMovement: 0.1
   forceToApply: 3.59
   uiDocument: {fileID: 124550704}
   cameraMain: {fileID: 519420031}
@@ -8057,7 +8053,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 110245824}
+    m_TransformParent: {fileID: 1425810061}
     m_Modifications:
     - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LocalScale.x
@@ -8484,6 +8480,10 @@ Transform:
   - {fileID: 414140266}
   - {fileID: 1485419874}
   - {fileID: 121456297}
+  - {fileID: 1381738128}
+  - {fileID: 352011127}
+  - {fileID: 1535139879}
+  - {fileID: 971664209}
   m_Father: {fileID: 2050489333}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1426703015
@@ -8961,7 +8961,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 110245824}
+    m_TransformParent: {fileID: 1425810061}
     m_Modifications:
     - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LocalScale.y
