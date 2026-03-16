@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5920401464557400365}
   - component: {fileID: 7558153104484926915}
   - component: {fileID: 4542341743045022058}
+  - component: {fileID: -7762689537967704958}
   m_Layer: 0
   m_Name: WallPiece
   m_TagString: Untagged
@@ -119,3 +120,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-7762689537967704958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8162485002744491629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1876d723f6ae24c829a21280eff935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WallManager

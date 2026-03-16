@@ -9,8 +9,6 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
     private static PlayerControl controls; // Reference to the generated class
     public GameObject player;
-    bool m_GameOver = false;
-    bool m_Started = false;
     public GameObject leftmostBorder;
     public GameObject rightmostBorder;
     public GameObject bottommostBorder;
@@ -25,6 +23,8 @@ public class MainManager : MonoBehaviour
     public UIDocument uiDocument;
     private Label scoreText;
     private float gameTimeInSeconds;
+    private static Camera m_cameraMain = null;
+    private static Camera m_cameraPlayer = null;
     public Camera cameraMain;
     public Camera cameraPlayer;
     private bool cameraMainOn = true;
@@ -57,13 +57,31 @@ public class MainManager : MonoBehaviour
     {
         playerRB = player.GetComponent<Rigidbody2D>();
         scoreText = uiDocument.rootVisualElement.Q<Label>("TimeText");
+        if (m_cameraMain == null)
+        {
+            m_cameraMain = cameraMain;
+        }
+        else
+        {
+            cameraMain = m_cameraMain;
+        }
+        if (m_cameraPlayer == null)
+        {
+            m_cameraPlayer = cameraPlayer;
+
+        }
+        else
+        {
+            cameraPlayer = m_cameraPlayer;
+        }
     }
     private void Update()
     {
-        gameTimeInSeconds += Time.deltaTime;
-        scoreText.text = "Time: " + TimeSpan.FromSeconds(gameTimeInSeconds).ToString(@"mm\:ss");
-        if (!m_Started)
+        if (player != null)
         {
+
+            gameTimeInSeconds += Time.deltaTime;
+            scoreText.text = "Time: " + TimeSpan.FromSeconds(gameTimeInSeconds).ToString(@"mm\:ss");
             // Update is called once per frame
             bool isPressed = controls.Move.MoveLeft.IsPressed();//.Gameplay.GameStart.IsPressed();
             if (isPressed)
@@ -141,8 +159,12 @@ public class MainManager : MonoBehaviour
             isPressed = controls.GamePlay.GameStart.IsPressed();
             if (isPressed)
             {
+                Debug.Log("Start Selected!");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                cameraPlayer = m_cameraPlayer;
+                cameraMain = m_cameraMain;
                 //Reset();
+                return;
             }
             isPressed = controls.Camera.CameraButton.WasPressedThisFrame();
             if (isPressed)
@@ -164,19 +186,10 @@ public class MainManager : MonoBehaviour
 
                 }
             }
-            cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
-
-        }
-        else if (m_GameOver)
-        {
-            //Direct read from keyboard
-            //bool isPressed = Keyboard.current[Key.Space].isPressed;
-            //bool isPressed = controls.Gameplay.GameStart.IsPressed();
-            //if (isPressed)
-            //{
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            //Reset();
-            //}
+            if (cameraPlayer != null)
+            {
+                cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
+            }
         }
     }
     public void FixedUpdate()
@@ -192,5 +205,9 @@ public class MainManager : MonoBehaviour
             //playerRB.AddForceX(forceToApply, ForceMode2D.Force);
         }
 
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision: " + collision.ToString());
     }
 }
