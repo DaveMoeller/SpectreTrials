@@ -2380,8 +2380,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1027075333}
   - {fileID: 619906721}
+  - {fileID: 1027075333}
   m_Father: {fileID: 533837024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &497256975
@@ -2831,7 +2831,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2050489333}
-  - {fileID: 784443719}
   - {fileID: 740038196}
   - {fileID: 481414381}
   m_Father: {fileID: 1827383866}
@@ -3685,7 +3684,7 @@ Transform:
   m_GameObject: {fileID: 619906720}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.06, y: 16.87, z: 0}
+  m_LocalPosition: {x: -14.76, y: 7.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4804,13 +4803,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784443718}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1015404255}
-  m_Father: {fileID: 533837024}
+  m_Father: {fileID: 2050489333}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &785625849
 PrefabInstance:
@@ -5834,7 +5833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1015404255}
   m_Layer: 0
-  m_Name: SwitchDoor
+  m_Name: SwitchDoorExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5851,7 +5850,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7854193728566912592}
   - {fileID: 5590533247260060979}
@@ -5942,7 +5941,7 @@ Transform:
   m_GameObject: {fileID: 1027075331}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.7499995, y: 0, z: 0}
+  m_LocalPosition: {x: -7.7499995, y: -4.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11140,6 +11139,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1425810061}
     m_Modifications:
+    - target: {fileID: 851448324829143166, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 7a83fb4b60a5f054bbe27c3e6baf6e98, type: 2}
     - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -11188,9 +11191,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7558153104484926915, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.020334648
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558153104484926915, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7474682
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558153104484926915, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7698112
+      objectReference: {fileID: 0}
     - target: {fileID: 8162485002744491629, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_Name
-      value: Square (67)
+      value: BouncySquare1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11778,6 +11793,7 @@ Transform:
   m_Children:
   - {fileID: 1425810061}
   - {fileID: 110245824}
+  - {fileID: 784443719}
   m_Father: {fileID: 533837024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2053891125
@@ -12351,7 +12367,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2419603604492109361, guid: b71961f7567e6c3448dc96f07242ca85, type: 3}
       propertyPath: m_Name
-      value: Door
+      value: DoorExit
       objectReference: {fileID: 0}
     - target: {fileID: 9112931519431498734, guid: b71961f7567e6c3448dc96f07242ca85, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12359,7 +12375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9112931519431498734, guid: b71961f7567e6c3448dc96f07242ca85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.465731
+      value: -1.31
       objectReference: {fileID: 0}
     - target: {fileID: 9112931519431498734, guid: b71961f7567e6c3448dc96f07242ca85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12413,11 +12429,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4598321440300039127, guid: 3cb930118c68fe745b083ce715d0fbee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.93
+      value: 10.24
       objectReference: {fileID: 0}
     - target: {fileID: 4598321440300039127, guid: 3cb930118c68fe745b083ce715d0fbee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.09
+      value: 9.21
       objectReference: {fileID: 0}
     - target: {fileID: 4598321440300039127, guid: 3cb930118c68fe745b083ce715d0fbee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12451,9 +12467,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4598321440300039127, guid: 3cb930118c68fe745b083ce715d0fbee, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7013106359434668470, guid: 3cb930118c68fe745b083ce715d0fbee, type: 3}
       propertyPath: m_Name
-      value: DoorSwitch
+      value: DoorSwitchExit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
