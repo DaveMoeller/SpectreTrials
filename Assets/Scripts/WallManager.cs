@@ -15,6 +15,6 @@ public class WallManager : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Wall collision!");
+        Debug.Log($"Wall collision! Main Object: {collision.gameObject.name} Other Object: {collision.otherRigidbody.name}");
     }
 }

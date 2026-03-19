@@ -18,7 +18,7 @@ public class MainManager : MonoBehaviour
     public float deltaMovement = 0.1f;
     [Range(0.1f, 10.0f)]
     [Tooltip("Force to apply in direction")]
-    public float forceToApply = 1.0f;
+    public float forceToApply = 1.5f;
     Rigidbody2D playerRB;
     public UIDocument uiDocument;
     private Label scoreText;
@@ -79,49 +79,11 @@ public class MainManager : MonoBehaviour
     {
         if (player != null)
         {
-
+            bool isPressed;
             gameTimeInSeconds += Time.deltaTime;
             scoreText.text = "Time: " + TimeSpan.FromSeconds(gameTimeInSeconds).ToString(@"mm\:ss");
-            // Update is called once per frame
-            bool isPressed = controls.Move.MoveLeft.IsPressed();//.Gameplay.GameStart.IsPressed();
-            if (isPressed)
-            {
-                Debug.Log("MoveLeft pressed!");
-                Vector3 pos, borderPos;
-                Quaternion rotation, borderRotation;
-                player.transform.GetPositionAndRotation(out pos, out rotation);
-                leftmostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
-                Debug.Log($"pos: {pos}, borderPos: {borderPos}");
-
-                pos.x -= deltaMovement;
-                if (pos.x < borderPos.x)
-                {
-                    pos.x = borderPos.x;
-                    //leftmostBorder.transform.
-                }
-                player.transform.position = pos;
-                //playerRB.linearVelocityX = -deltaMovement;
-                //playerRB.linearVelocityX = -deltaMovement;
-                //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-                //Vector2 newDir = new Vector2(1.0f + (1.0f * (-deltaMovement)), 0.0f);
-                //playerRB.AddForce(newDir);
-            }
-            isPressed = controls.Move.MoveRight.IsPressed();
-            if (isPressed)
-            {
-                Debug.Log("MoveRight pressed!");
-                Vector3 pos = player.transform.position;
-                pos.x += deltaMovement;
-                if (pos.x > rightmostBorder.transform.position.x)
-                {
-                    pos.x = rightmostBorder.transform.position.x;
-                }
-                //ToDo: Test
-                player.transform.position = pos;
-                //playerRB.linearVelocityX = deltaMovement;
-                //playerRB.AddForceX(deltaMovement, ForceMode2D.Impulse);
-            }
-            isPressed = controls.Move.MoveUp.IsPressed();//.Gameplay.GameStart.IsPressed();
+            /*
+            isPressed = controls.Move.MoveUp.IsPressed();
             if (isPressed)
             {
                 Debug.Log("MoveUp pressed!");
@@ -130,7 +92,7 @@ public class MainManager : MonoBehaviour
                 Quaternion rotation, borderRotation;
                 player.transform.GetPositionAndRotation(out pos, out rotation);
                 topmostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
-                Debug.Log($"pos: {pos}, borderPos: {borderPos}");
+                //Debug.Log($"pos: {pos}, borderPos: {borderPos}");
                 pos.y += deltaMovement;
                 if (pos.y > borderPos.y)
                 {
@@ -155,6 +117,7 @@ public class MainManager : MonoBehaviour
                 }
                 player.transform.position = pos;
             }
+          */
             //Reload the game
             isPressed = controls.GamePlay.GameStart.IsPressed();
             if (isPressed)
@@ -191,21 +154,65 @@ public class MainManager : MonoBehaviour
                 cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
             }
         }
+
     }
+
     public void FixedUpdate()
     {
-        bool isPressed;
-        //isPressed = controls.Move.MoveRight.WasPressedThisFrame();
+        bool isPressed = controls.Move.MoveLeft.IsPressed();//.Gameplay.GameStart.IsPressed();
+        if (isPressed)
+        {
+            Debug.Log("MoveLeft pressed!");
+            Vector3 pos, borderPos;
+            Quaternion rotation, borderRotation;
+            player.transform.GetPositionAndRotation(out pos, out rotation);
+            leftmostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
+            Debug.Log($"pos: {pos}, borderPos: {borderPos}");
+            //Incremental Movements
+            //playerRB.linearVelocityX = -forceToApply;
+            //playerRB.linearVelocityX = -deltaMovement;
+            //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
+            Vector2 newDir = new Vector2((-1.0f * forceToApply * Time.deltaTime), 0.0f).normalized;
+            playerRB.AddForce(newDir, ForceMode2D.Force);
+            Debug.Log($"PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
+        }
         isPressed = controls.Move.MoveRight.IsPressed();
         if (isPressed)
         {
-            Debug.Log("MoveRight pressed this frame!");
-            //playerRB.linearVelocityX = deltaMovement;
-            //playerRB.AddForceX(deltaMovement, ForceMode2D.Impulse);
-            //playerRB.AddForceX(forceToApply, ForceMode2D.Force);
+            Debug.Log("MoveRight pressed!");
+            //playerRB.linearVelocityX = forceToApply;
+            //playerRB.linearVelocityX = -deltaMovement;
+            //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
+            Vector2 newDir = new Vector2((1.0f * forceToApply * Time.deltaTime), 0.0f).normalized;
+            playerRB.AddForce(newDir, ForceMode2D.Force);
+            Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
+        }
+        isPressed = controls.Move.MoveUp.IsPressed();
+        if (isPressed)
+        {
+            Debug.Log("MoveUp pressed!");
+            //playerRB.linearVelocityX = forceToApply;
+            //playerRB.linearVelocityX = -deltaMovement;
+            //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
+            Vector2 newDir = new Vector2(0.0f, (1.0f * forceToApply * Time.deltaTime)).normalized;
+            playerRB.AddForce(newDir, ForceMode2D.Force);
+            Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
+        }
+        isPressed = controls.Move.MoveDown.IsPressed();
+        if (isPressed)
+        {
+            Debug.Log("MoveDown pressed!");
+            //playerRB.linearVelocityX = forceToApply;
+            //playerRB.linearVelocityX = -deltaMovement;
+            //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
+            Vector2 newDir = new Vector2(0.0f, (-1.0f * forceToApply * Time.deltaTime)).normalized;
+            playerRB.AddForce(newDir, ForceMode2D.Force);
+            Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
 
     }
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision: " + collision.ToString());
