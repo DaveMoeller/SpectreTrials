@@ -276,6 +276,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Location"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c5b34e8-5310-48a1-b018-a12040a7ea11"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -309,6 +318,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""GameStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0d7bf65-e045-4cd6-a2d9-f97e0c5c0c6e"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Location"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -354,6 +374,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_GameStart = m_GamePlay.FindAction("GameStart", throwIfNotFound: true);
+        m_GamePlay_Location = m_GamePlay.FindAction("Location", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_CameraButton = m_Camera.FindAction("CameraButton", throwIfNotFound: true);
@@ -569,6 +590,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GamePlay;
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_GameStart;
+    private readonly InputAction m_GamePlay_Location;
     /// <summary>
     /// Provides access to input actions defined in input action map "GamePlay".
     /// </summary>
@@ -584,6 +606,10 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GamePlay/GameStart".
         /// </summary>
         public InputAction @GameStart => m_Wrapper.m_GamePlay_GameStart;
+        /// <summary>
+        /// Provides access to the underlying input action "GamePlay/Location".
+        /// </summary>
+        public InputAction @Location => m_Wrapper.m_GamePlay_Location;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -613,6 +639,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @GameStart.started += instance.OnGameStart;
             @GameStart.performed += instance.OnGameStart;
             @GameStart.canceled += instance.OnGameStart;
+            @Location.started += instance.OnLocation;
+            @Location.performed += instance.OnLocation;
+            @Location.canceled += instance.OnLocation;
         }
 
         /// <summary>
@@ -627,6 +656,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @GameStart.started -= instance.OnGameStart;
             @GameStart.performed -= instance.OnGameStart;
             @GameStart.canceled -= instance.OnGameStart;
+            @Location.started -= instance.OnLocation;
+            @Location.performed -= instance.OnLocation;
+            @Location.canceled -= instance.OnLocation;
         }
 
         /// <summary>
@@ -806,6 +838,13 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGameStart(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Location" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLocation(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.

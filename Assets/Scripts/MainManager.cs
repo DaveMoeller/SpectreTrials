@@ -28,6 +28,11 @@ public class MainManager : MonoBehaviour
     public Camera cameraMain;
     public Camera cameraPlayer;
     private bool cameraMainOn = true;
+    GameObject[] startingLocations;
+    private int currentStartingLocation = 0;
+
+    private string tagToFind = "StartLocation";
+
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -57,6 +62,19 @@ public class MainManager : MonoBehaviour
     {
         playerRB = player.GetComponent<Rigidbody2D>();
         scoreText = uiDocument.rootVisualElement.Q<Label>("TimeText");
+        //Find all starting locations
+        startingLocations = GameObject.FindGameObjectsWithTag(tagToFind);
+        if (startingLocations.Length > 0)
+        {
+            // set player location to first start location
+            Debug.Log($"Setting starting position to: {startingLocations[0].name}");
+            player.transform.SetPositionAndRotation(startingLocations[currentStartingLocation].transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("No starting locations exist!");
+            return;
+        }
         if (m_cameraMain == null)
         {
             m_cameraMain = cameraMain;
@@ -74,6 +92,7 @@ public class MainManager : MonoBehaviour
         {
             cameraPlayer = m_cameraPlayer;
         }
+
     }
     private void Update()
     {
@@ -118,6 +137,17 @@ public class MainManager : MonoBehaviour
                 player.transform.position = pos;
             }
           */
+            //switch starting locations
+            isPressed = controls.GamePlay.Location.WasPressedThisFrame();
+            if (isPressed)
+            {
+                currentStartingLocation++;
+                if (currentStartingLocation >= startingLocations.Length)
+                {
+                    currentStartingLocation = 0;
+                }
+                player.transform.SetPositionAndRotation(startingLocations[currentStartingLocation].transform.position, Quaternion.identity);
+            }
             //Reload the game
             isPressed = controls.GamePlay.GameStart.IsPressed();
             if (isPressed)
