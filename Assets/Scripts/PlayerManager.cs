@@ -88,5 +88,10 @@ public class PlayerManager : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log($"Player collision! Main Object: {collision.gameObject.name} Other Object: {collision.otherRigidbody.name}");
+        if(collision.gameObject.name == "DoorSwitchExit")
+        {
+            //Disable parent containing switch and door blocker
+            collision.gameObject.transform.parent.gameObject.SetActive(false);
+        }
     }
 }
