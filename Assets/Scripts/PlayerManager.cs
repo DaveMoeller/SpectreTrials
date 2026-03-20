@@ -91,7 +91,20 @@ public class PlayerManager : MonoBehaviour
         if(collision.gameObject.name == "DoorSwitchExit")
         {
             //Disable parent containing switch and door blocker
-            collision.gameObject.transform.parent.gameObject.SetActive(false);
+            //collision.gameObject.transform.parent.gameObject.SetActive(false);
+            //Get the child particle system
+            //collision.gameObject.
+            //Set PS active
+            //Destroy parent object after explosion
+            foreach (Transform childTransform in collision.gameObject.transform)
+            {
+                GameObject childObjectPS = childTransform.gameObject;
+                //Debug.Log("Child name: " + childObject.name, childObject);
+                // You can now perform actions on the child GameObject
+                childObjectPS.SetActive(true);
+            }
+            //ToDo:get time from particle system
+            Destroy(collision.gameObject.transform.parent.gameObject, 4.0f);
         }
     }
 }
