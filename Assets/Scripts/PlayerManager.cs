@@ -111,5 +111,11 @@ public class PlayerManager : MonoBehaviour
             //ToDo:get time from particle system
             Destroy(collision.gameObject.transform.parent.gameObject, durationPS);
         }
+        if (collision.gameObject.CompareTag("Key"))
+        {
+            Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
+
+        }
     }
+ 
 }
