@@ -88,7 +88,7 @@ public class PlayerManager : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log($"Player collision! Main Object: {collision.gameObject.name} Other Object: {collision.otherRigidbody.name}");
-        if(collision.gameObject.name == "DoorSwitchExit")
+        if (collision.gameObject.name == "DoorSwitchExit")
         {
             //Disable parent containing switch and door blocker
             //collision.gameObject.transform.parent.gameObject.SetActive(false);
@@ -96,15 +96,20 @@ public class PlayerManager : MonoBehaviour
             //collision.gameObject.
             //Set PS active
             //Destroy parent object after explosion
+            float durationPS = 2.0f;
             foreach (Transform childTransform in collision.gameObject.transform)
             {
-                GameObject childObjectPS = childTransform.gameObject;
+                GameObject childObject = childTransform.gameObject;
+                ParticleSystem childPS = childObject.GetComponent<ParticleSystem>();
                 //Debug.Log("Child name: " + childObject.name, childObject);
                 // You can now perform actions on the child GameObject
-                childObjectPS.SetActive(true);
+                var mainModule = childPS.main;
+                durationPS = mainModule.duration;
+                mainModule.playOnAwake = true;
+                childObject.SetActive(true);
             }
             //ToDo:get time from particle system
-            Destroy(collision.gameObject.transform.parent.gameObject, 4.0f);
+            Destroy(collision.gameObject.transform.parent.gameObject, durationPS);
         }
     }
 }

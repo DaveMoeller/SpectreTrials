@@ -101,42 +101,6 @@ public class MainManager : MonoBehaviour
             bool isPressed;
             gameTimeInSeconds += Time.deltaTime;
             scoreText.text = "Time: " + TimeSpan.FromSeconds(gameTimeInSeconds).ToString(@"mm\:ss");
-            /*
-            isPressed = controls.Move.MoveUp.IsPressed();
-            if (isPressed)
-            {
-                Debug.Log("MoveUp pressed!");
-                //Vector3 pos = player.transform.position;
-                Vector3 pos, borderPos;
-                Quaternion rotation, borderRotation;
-                player.transform.GetPositionAndRotation(out pos, out rotation);
-                topmostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
-                //Debug.Log($"pos: {pos}, borderPos: {borderPos}");
-                pos.y += deltaMovement;
-                if (pos.y > borderPos.y)
-                {
-                    pos.y = borderPos.y;
-                }
-                player.transform.position = pos;
-            }
-            isPressed = controls.Move.MoveDown.IsPressed();
-            if (isPressed)
-            {
-                Debug.Log("MoveDown pressed!");
-                Vector3 pos, borderPos;
-                Quaternion rotation, borderRotation;
-                player.transform.GetPositionAndRotation(out pos, out rotation);
-                bottommostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
-                Debug.Log($"pos: {pos}, borderPos: {borderPos}");
-                //Vector3 pos = player.transform.position;
-                pos.y -= deltaMovement;
-                if (pos.y < borderPos.y)
-                {
-                    pos.y = borderPos.y;
-                }
-                player.transform.position = pos;
-            }
-          */
             //switch starting locations
             isPressed = controls.GamePlay.Location.WasPressedThisFrame();
             if (isPressed)
@@ -198,11 +162,7 @@ public class MainManager : MonoBehaviour
             player.transform.GetPositionAndRotation(out pos, out rotation);
             leftmostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
             Debug.Log($"pos: {pos}, borderPos: {borderPos}");
-            //Incremental Movements
-            //playerRB.linearVelocityX = -forceToApply;
-            //playerRB.linearVelocityX = -deltaMovement;
-            //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-            Vector2 newDir = new Vector2((-1.0f * forceToApply * Time.deltaTime), 0.0f).normalized;
+            Vector2 newDir = new Vector2((-1.0f * forceToApply * Time.fixedDeltaTime), 0.0f).normalized;
             playerRB.AddForce(newDir, ForceMode2D.Force);
             Debug.Log($"PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
@@ -213,7 +173,7 @@ public class MainManager : MonoBehaviour
             //playerRB.linearVelocityX = forceToApply;
             //playerRB.linearVelocityX = -deltaMovement;
             //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-            Vector2 newDir = new Vector2((1.0f * forceToApply * Time.deltaTime), 0.0f).normalized;
+            Vector2 newDir = new Vector2((1.0f * forceToApply * Time.fixedDeltaTime), 0.0f).normalized;
             playerRB.AddForce(newDir, ForceMode2D.Force);
             Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
@@ -224,7 +184,7 @@ public class MainManager : MonoBehaviour
             //playerRB.linearVelocityX = forceToApply;
             //playerRB.linearVelocityX = -deltaMovement;
             //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-            Vector2 newDir = new Vector2(0.0f, (1.0f * forceToApply * Time.deltaTime)).normalized;
+            Vector2 newDir = new Vector2(0.0f, (1.0f * forceToApply * Time.fixedDeltaTime)).normalized;
             playerRB.AddForce(newDir, ForceMode2D.Force);
             Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
@@ -235,7 +195,7 @@ public class MainManager : MonoBehaviour
             //playerRB.linearVelocityX = forceToApply;
             //playerRB.linearVelocityX = -deltaMovement;
             //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-            Vector2 newDir = new Vector2(0.0f, (-1.0f * forceToApply * Time.deltaTime)).normalized;
+            Vector2 newDir = new Vector2(0.0f, (-1.0f * forceToApply * Time.fixedDeltaTime)).normalized;
             playerRB.AddForce(newDir, ForceMode2D.Force);
             Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
