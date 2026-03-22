@@ -30,7 +30,7 @@ public class MainManager : MonoBehaviour
     private bool cameraMainOn = true;
     GameObject[] startingLocations;
     private int currentStartingLocation = 0;
-
+    public String[] tagsToTurnOnForSwitch;
     private string tagToFind = "StartLocation";
 
     public PlayerControl PlayerControlsShared { get { return controls; } }
@@ -91,6 +91,25 @@ public class MainManager : MonoBehaviour
         else
         {
             cameraPlayer = m_cameraPlayer;
+        }
+        setObjectsVisible(false);
+    }
+    public void setObjectsVisible(bool visible)
+    {
+        //Switch objects with tags off - to be turned on later with object hit
+        if (tagsToTurnOnForSwitch.Length > 0)
+        {
+            for (int i = 0; i < tagsToTurnOnForSwitch.Length; i++)
+            {
+                //Get the objects with tag
+                GameObject[] ObjectsToStitchOff = GameObject.FindGameObjectsWithTag(tagsToTurnOnForSwitch[i]);
+                for (int j = 0; j < ObjectsToStitchOff.Length; j++)
+                {
+                    //Turn off
+                    SpriteRenderer sr = ObjectsToStitchOff[j].GetComponent<SpriteRenderer>();
+                    sr.enabled = visible;
+                }
+            }
         }
 
     }

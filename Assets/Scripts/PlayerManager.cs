@@ -38,53 +38,7 @@ public class PlayerManager : MonoBehaviour
     {
 
     }
-    /*
-    public void FixedUpdate()
-    {
-        bool isPressed = false;
-        isPressed = controls.Move.MoveLeft.IsPressed();//.Gameplay.GameStart.IsPressed();
-        if (isPressed)
-        {
-            Debug.Log("PlayerManager: MoveLeft pressed!");
-            Vector3 pos, borderPos;
-            Quaternion rotation, borderRotation;
-            transform.GetPositionAndRotation(out pos, out rotation);
-            leftmostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
-            Debug.Log($"pos: {pos}, borderPos: {borderPos}");
-            //Incremental Movements
-            if (false)
-            {
-                pos.x -= deltaMovement;
-                if (pos.x < borderPos.x)
-                {
-                    pos.x = borderPos.x;
-                }
-                transform.position = pos;
 
-            }
-            else
-            {
-
-                playerRB.linearVelocityX = -forceToApply;
-                //playerRB.linearVelocityX = -deltaMovement;
-                //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-                Vector2 newDir = new Vector2((-1.0f * forceToApply * Time.deltaTime), 0.0f).normalized;
-                playerRB.AddForce(newDir, ForceMode2D.Force);
-                Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
-            }
-        }
-        isPressed = controls.Move.MoveRight.IsPressed();
-        if (isPressed)
-        {
-            playerRB.linearVelocityX = forceToApply;
-            //playerRB.linearVelocityX = -deltaMovement;
-            //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-            Vector2 newDir = new Vector2((1.0f * forceToApply * Time.deltaTime), 0.0f).normalized;
-            playerRB.AddForce(newDir, ForceMode2D.Force);
-            Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
-        }
-
-    }*/
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log($"Player collision! Main Object: {collision.gameObject.name} Other Object: {collision.otherRigidbody.name}");
@@ -101,8 +55,6 @@ public class PlayerManager : MonoBehaviour
             {
                 GameObject childObject = childTransform.gameObject;
                 ParticleSystem childPS = childObject.GetComponent<ParticleSystem>();
-                //Debug.Log("Child name: " + childObject.name, childObject);
-                // You can now perform actions on the child GameObject
                 var mainModule = childPS.main;
                 durationPS = mainModule.duration;
                 mainModule.playOnAwake = true;
@@ -116,6 +68,11 @@ public class PlayerManager : MonoBehaviour
             Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
 
         }
+        if (collision.gameObject.name == "LightSwitch01")
+        {
+            MainManager.Instance.setObjectsVisible(true);
+            Destroy(collision.gameObject, 0.5f);
+        }
     }
- 
+
 }

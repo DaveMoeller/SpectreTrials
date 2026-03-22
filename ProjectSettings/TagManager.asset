@@ -6,6 +6,9 @@ TagManager:
   tags:
   - StartLocation
   - Key
+  - LightGroup01
+  - LightGroup
+  - LightGroup02
   layers:
   - Default
   - TransparentFX
