@@ -73,6 +73,17 @@ public class PlayerManager : MonoBehaviour
             MainManager.Instance.setObjectsVisible(true);
             Destroy(collision.gameObject, 0.5f);
         }
+        if (collision.gameObject.CompareTag("WallPiece"))
+        {
+            //Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
+            //Change the color
+            //collision.gameObject
+            Renderer renderer = collision.gameObject.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material.color = Color.cornflowerBlue;
+            }
+        }
     }
 
 }

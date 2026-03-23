@@ -9,6 +9,7 @@ TagManager:
   - LightGroup01
   - LightGroup
   - LightGroup02
+  - WallPiece
   layers:
   - Default
   - TransparentFX
