@@ -73,7 +73,7 @@ public class PlayerManager : MonoBehaviour
             MainManager.Instance.setObjectsVisible(true);
             Destroy(collision.gameObject, 0.5f);
         }
-        if (collision.gameObject.CompareTag("WallPiece"))
+        if (collision.gameObject.name.Contains("WallPiece"))
         {
             //Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
             //Change the color
@@ -81,8 +81,7 @@ public class PlayerManager : MonoBehaviour
             SpriteRenderer renderer = collision.gameObject.GetComponent<SpriteRenderer>();
             if (renderer != null)
             {
-                //collision.gameObject.GetComponent<SpriteRenderer>().material.color = Color.cornflowerBlue;
-                renderer.color = Color.cornflowerBlue;
+                 renderer.color = Color.cornflowerBlue;
             }
         }
     }
