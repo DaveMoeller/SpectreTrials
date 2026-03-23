@@ -1,4 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Label text="Spectre Trials&#x9;" name="GameTitle" style="color: rgb(12, 165, 51); font-size: 36px; -unity-font-style: bold; align-items: center; justify-content: center; align-self: center;"/>
     <ui:Label text="Time:" name="TimeText" style="align-self: flex-end; font-size: 24px; -unity-font-style: bold; margin-right: 63px; color: rgb(180, 180, 12);"/>
+    <ui:Label text="Score:&#10;" name="Score" style="align-self: flex-end; font-size: 24px; -unity-font-style: bold; margin-right: 63px; color: rgb(12, 180, 31);"/>
 </ui:UXML>
