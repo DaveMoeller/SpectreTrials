@@ -28,7 +28,12 @@ public class PlayerManager : MonoBehaviour
         {
             Instance = this;
             controls = new PlayerControl();
-            DontDestroyOnLoad(Instance); // same as GameObject
+            /*
+             DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+            UnityEngine.Object:DontDestroyOnLoad (UnityEngine.Object)
+            PlayerManager:Awake () (at Assets/Scripts/PlayerManager.cs:31)
+            */
+ //           DontDestroyOnLoad(Instance); // same as GameObject
 
         }
     }

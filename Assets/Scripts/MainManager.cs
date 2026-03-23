@@ -32,6 +32,8 @@ public class MainManager : MonoBehaviour
     private int currentStartingLocation = 0;
     public String[] tagsToTurnOnForSwitch;
     private string tagToFind = "StartLocation";
+    [Tooltip("Object to hit and get points.")]
+    public GameObject pointObject;
 
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
@@ -110,6 +112,11 @@ public class MainManager : MonoBehaviour
                     sr.enabled = visible;
                 }
             }
+        }
+        if (visible)
+        {
+            CreatePointObjects();
+
         }
 
     }
@@ -220,7 +227,36 @@ public class MainManager : MonoBehaviour
         }
 
     }
+    private void CreatePointObjects()
+    {
+        //Instantiate point objects in gamespace
+        float x, y;
+        float incrementX = 1.0f;
+        float incrementY = -1.50f;
+        float startX = -14.0f, startY = 30.75f;
+        float endX = 13.0f, endY = 5.25f;
 
+        for (x = startX; x <= endX; x = x + incrementX)
+        {
+            for (y = startY; y >= endY; y = y + incrementY)
+            {
+                //x = -14.75f; y = 19.25f;
+                Vector3 poScale = pointObject.transform.localScale;
+                Vector2 pos = new Vector2(x, y);
+                Vector2 boxSize = new Vector2(poScale.x, poScale.y);
+                Debug.Log($"Trying to instantiate at {pos}");
+                if (!Physics2D.OverlapBox(pos, boxSize, 0.0f))
+                {
+                    Instantiate(pointObject, pos, Quaternion.identity);
+                    Debug.Log("Object spawned in empty space!");
+                }
+                else
+                {
+                    Debug.Log("Space occupied, cannot spawn.");
+                }
+            }
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
