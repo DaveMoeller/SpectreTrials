@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
 
         }
-        if (collision.gameObject.name == "LightSwitch01")
+        if (collision.gameObject.name.Contains("LightSwitch"))
         {
             MainManager.Instance.setObjectsVisible(true);
             Destroy(collision.gameObject, 0.5f);
@@ -78,10 +78,11 @@ public class PlayerManager : MonoBehaviour
             //Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
             //Change the color
             //collision.gameObject
-            Renderer renderer = collision.gameObject.GetComponent<Renderer>();
+            SpriteRenderer renderer = collision.gameObject.GetComponent<SpriteRenderer>();
             if (renderer != null)
             {
-                renderer.material.color = Color.cornflowerBlue;
+                //collision.gameObject.GetComponent<SpriteRenderer>().material.color = Color.cornflowerBlue;
+                renderer.color = Color.cornflowerBlue;
             }
         }
     }
