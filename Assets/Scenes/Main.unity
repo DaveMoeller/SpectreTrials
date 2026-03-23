@@ -11575,6 +11575,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1425810061}
     m_Modifications:
+    - target: {fileID: 4542341743045022058, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
+      propertyPath: m_Mass
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542341743045022058, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -11623,9 +11631,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7558153104484926915, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.0424848
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558153104484926915, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
+      propertyPath: m_Color.g
+      value: 0.83396226
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558153104484926915, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.47837168
+      objectReference: {fileID: 0}
     - target: {fileID: 8162485002744491629, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_Name
-      value: WallPiece (38)
+      value: WallPiece - Moveable 01
       objectReference: {fileID: 0}
     - target: {fileID: 8162485002744491629, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_TagString
