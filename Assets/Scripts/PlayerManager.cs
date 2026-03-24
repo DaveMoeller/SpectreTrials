@@ -75,14 +75,20 @@ public class PlayerManager : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("PointObject"))
         {
-            Destroy(collision.gameObject);
+            ParticleSystem ps = collision.gameObject.GetComponent<ParticleSystem>();
+            var mainModule = ps.main;
+            float durationPS = mainModule.duration;
+            //mainModule.playOnAwake = true;
+            ps.Play();
+            Destroy(collision.gameObject, durationPS);
+            //Destroy(collision.gameObject);
             MainManager.Instance.IncrementScore(1);
 
         }
         if (collision.gameObject.name.Contains("LightSwitch"))
         {
             MainManager.Instance.setObjectsVisible(true);
-            Destroy(collision.gameObject, 0.5f);
+            Destroy(collision.gameObject, 0.1f);
         }
         if (collision.gameObject.name.Contains("WallPiece"))
         {
