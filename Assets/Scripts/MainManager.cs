@@ -73,9 +73,10 @@ public class MainManager : MonoBehaviour
         startingLocations = GameObject.FindGameObjectsWithTag(tagToFind);
         if (startingLocations.Length > 0)
         {
+            int randomStart = UnityEngine.Random.Range(0, startingLocations.Length-1);
             // set player location to first start location
-            Debug.Log($"Setting starting position to: {startingLocations[0].name}");
-            player.transform.SetPositionAndRotation(startingLocations[0].transform.position, Quaternion.identity);
+            Debug.Log($"Setting starting position to: {startingLocations[randomStart].name}");
+            player.transform.SetPositionAndRotation(startingLocations[randomStart].transform.position, Quaternion.identity);
         }
         else
         {

@@ -36,9 +36,9 @@ public class EnemyManager : MonoBehaviour
         Vector2 dir = calculateMoveVector(playerPos, enemyPos);
 
         //Calculate vector
-        Debug.Log($"playerPos:{playerPos}");
-        Debug.Log($"enemyPos:{enemyPos}");
-        Debug.Log($"Direction:{dir}");
+        //Debug.Log($"playerPos:{playerPos}");
+        //Debug.Log($"enemyPos:{enemyPos}");
+        //Debug.Log($"Direction:{dir}");
 
         //Move towards player at speed and delta time
         //AddForce
