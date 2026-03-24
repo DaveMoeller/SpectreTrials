@@ -7720,6 +7720,7 @@ MonoBehaviour:
   - LightGroup01
   - LightGroup02
   pointObject: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+  gameUIDocumentObject: {fileID: 124550704}
 --- !u!4 &1233191729
 Transform:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class MainManager : MonoBehaviour
     public float forceToApply = 1.5f;
     Rigidbody2D playerRB;
     public UIDocument uiDocument;
+    private Label timeText;
     private Label scoreText;
     private float gameTimeInSeconds;
     private static Camera m_cameraMain = null;
@@ -34,6 +35,8 @@ public class MainManager : MonoBehaviour
     private string tagToFind = "StartLocation";
     [Tooltip("Object to hit and get points.")]
     public GameObject pointObject;
+    private int CurrentScore = 0;
+    private VisualElement root;
 
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
@@ -63,7 +66,8 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         playerRB = player.GetComponent<Rigidbody2D>();
-        scoreText = uiDocument.rootVisualElement.Q<Label>("TimeText");
+        timeText = uiDocument.rootVisualElement.Q<Label>("TimeText");
+        scoreText = uiDocument.rootVisualElement.Q<Label>("ScoreText");
         //Find all starting locations
         startingLocations = GameObject.FindGameObjectsWithTag(tagToFind);
         if (startingLocations.Length > 0)
@@ -95,6 +99,7 @@ public class MainManager : MonoBehaviour
             cameraPlayer = m_cameraPlayer;
         }
         setObjectsVisible(false);
+        root = uiDocument.rootVisualElement;
     }
     public void setObjectsVisible(bool visible)
     {
@@ -126,7 +131,7 @@ public class MainManager : MonoBehaviour
         {
             bool isPressed;
             gameTimeInSeconds += Time.deltaTime;
-            scoreText.text = "Time: " + TimeSpan.FromSeconds(gameTimeInSeconds).ToString(@"mm\:ss");
+            timeText.text = "Time: " + TimeSpan.FromSeconds(gameTimeInSeconds).ToString(@"mm\:ss");
             //switch starting locations
             isPressed = controls.GamePlay.Location.WasPressedThisFrame();
             if (isPressed)
@@ -257,7 +262,15 @@ public class MainManager : MonoBehaviour
             }
         }
     }
-
+    public void IncrementScore(int score = 1)
+    {
+        CurrentScore += score;
+        UpdateScoreText();
+    }
+    public void UpdateScoreText()
+    {
+        scoreText.text = $"Score:  {CurrentScore}" ;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision: " + collision.ToString());

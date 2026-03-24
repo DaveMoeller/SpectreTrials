@@ -73,6 +73,12 @@ public class PlayerManager : MonoBehaviour
             Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
 
         }
+        if (collision.gameObject.CompareTag("PointObject"))
+        {
+            Destroy(collision.gameObject);
+            MainManager.Instance.IncrementScore(1);
+
+        }
         if (collision.gameObject.name.Contains("LightSwitch"))
         {
             MainManager.Instance.setObjectsVisible(true);
