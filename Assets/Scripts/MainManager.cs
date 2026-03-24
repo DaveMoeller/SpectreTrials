@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -74,7 +75,7 @@ public class MainManager : MonoBehaviour
         {
             // set player location to first start location
             Debug.Log($"Setting starting position to: {startingLocations[0].name}");
-            player.transform.SetPositionAndRotation(startingLocations[currentStartingLocation].transform.position, Quaternion.identity);
+            player.transform.SetPositionAndRotation(startingLocations[0].transform.position, Quaternion.identity);
         }
         else
         {
@@ -127,9 +128,9 @@ public class MainManager : MonoBehaviour
     }
     private void Update()
     {
+        bool isPressed;
         if (player != null)
         {
-            bool isPressed;
             gameTimeInSeconds += Time.deltaTime;
             timeText.text = "Time: " + TimeSpan.FromSeconds(gameTimeInSeconds).ToString(@"mm\:ss");
             //switch starting locations
@@ -178,6 +179,12 @@ public class MainManager : MonoBehaviour
             {
                 cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
             }
+        }
+        isPressed = controls.GamePlay.GameEnd.IsPressed();
+        if (isPressed)
+        {
+            Debug.Log("Game End Selected!");
+            EndGame();
         }
 
     }
@@ -269,10 +276,20 @@ public class MainManager : MonoBehaviour
     }
     public void UpdateScoreText()
     {
-        scoreText.text = $"Score:  {CurrentScore}" ;
+        scoreText.text = $"Score:  {CurrentScore}";
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision: " + collision.ToString());
+    }
+    public void EndGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+        // If the game is a standalone build, quit the application
+#else
+            Application.Quit();
+#endif
+        Debug.Log("Game Over!");
     }
 }
