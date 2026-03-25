@@ -362,8 +362,7 @@ public class MainManager : MonoBehaviour
         gameOverText.visible = true;
 
         // GameOverText
-        if (autoBackToEditor) { EditorApplication.isPlaying = false; }
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
         if (autoBackToEditor)
 
         {
