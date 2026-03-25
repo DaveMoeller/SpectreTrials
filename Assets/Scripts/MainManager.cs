@@ -23,6 +23,9 @@ public class MainManager : MonoBehaviour
     [Range(0.1f, 10.0f)]
     [Tooltip("Force to apply in direction")]
     public float forceToApply = 1.5f;
+    [Range(0.1f, 2.0f)]
+    [Tooltip("Force to apply in direction using Impulse")]
+    public float forceToApplyImpulse = 0.5f;
     Rigidbody2D playerRB;
     public UIDocument uiDocument;
     private Label timeText;
@@ -41,7 +44,9 @@ public class MainManager : MonoBehaviour
     public GameObject pointObject;
     private int CurrentScore = 0;
     private VisualElement root;
-
+    public GameObject eyes;
+    public float eyeMoveAmount = 0.03f;
+    public bool usePulseAcceleration = false;
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -195,7 +200,8 @@ public class MainManager : MonoBehaviour
 
     public void FixedUpdate()
     {
-        bool isPressed = controls.Move.MoveLeft.IsPressed();//.Gameplay.GameStart.IsPressed();
+        bool isPressed;
+        isPressed = controls.Move.MoveLeft.IsPressed();//.Gameplay.GameStart.IsPressed();
         if (isPressed)
         {
             Debug.Log("MoveLeft pressed!");
@@ -204,10 +210,37 @@ public class MainManager : MonoBehaviour
             player.transform.GetPositionAndRotation(out pos, out rotation);
             leftmostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
             Debug.Log($"pos: {pos}, borderPos: {borderPos}");
-            Vector2 newDir = new Vector2((-1.0f * forceToApply * Time.fixedDeltaTime), 0.0f).normalized;
-            playerRB.AddForce(newDir, ForceMode2D.Force);
+            Vector2 newDir;
+            if (usePulseAcceleration)
+            {
+                newDir = new Vector2((-1.0f * forceToApplyImpulse * Time.fixedDeltaTime), 0.0f).normalized;
+                playerRB.AddForce(newDir, ForceMode2D.Impulse);
+
+            }
+            else
+            {
+                newDir = new Vector2((-1.0f * forceToApply * Time.fixedDeltaTime), 0.0f).normalized;
+                playerRB.AddForce(newDir, ForceMode2D.Force);
+
+            }
             Debug.Log($"PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
+            //move eyes
         }
+        /*
+        if (controls.Move.MoveLeft.WasPressedThisFrame())
+        {
+            //eyes.transform.position + 
+            eyes.transform.position = new Vector3(-eyeMoveAmount, 0);
+
+        }
+
+        if (controls.Move.MoveRight.WasPressedThisFrame())
+        {
+            //eyes.transform.position + 
+            eyes.transform.position = new Vector3(eyeMoveAmount, 0);
+
+        }
+        */
         isPressed = controls.Move.MoveRight.IsPressed();
         if (isPressed)
         {
@@ -215,8 +248,18 @@ public class MainManager : MonoBehaviour
             //playerRB.linearVelocityX = forceToApply;
             //playerRB.linearVelocityX = -deltaMovement;
             //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-            Vector2 newDir = new Vector2((1.0f * forceToApply * Time.fixedDeltaTime), 0.0f).normalized;
-            playerRB.AddForce(newDir, ForceMode2D.Force);
+            Vector2 newDir;
+            if (usePulseAcceleration)
+            {
+                newDir = new Vector2((1.0f * forceToApplyImpulse * Time.fixedDeltaTime), 0.0f).normalized;
+                playerRB.AddForce(newDir, ForceMode2D.Impulse);
+            }
+            else
+            {
+                newDir = new Vector2((1.0f * forceToApply * Time.fixedDeltaTime), 0.0f).normalized;
+                playerRB.AddForce(newDir, ForceMode2D.Force);
+
+            }
             Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
         isPressed = controls.Move.MoveUp.IsPressed();
@@ -226,8 +269,18 @@ public class MainManager : MonoBehaviour
             //playerRB.linearVelocityX = forceToApply;
             //playerRB.linearVelocityX = -deltaMovement;
             //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-            Vector2 newDir = new Vector2(0.0f, (1.0f * forceToApply * Time.fixedDeltaTime)).normalized;
-            playerRB.AddForce(newDir, ForceMode2D.Force);
+            Vector2 newDir;
+            if (usePulseAcceleration)
+            {
+                newDir = new Vector2(0.0f, (1.0f * forceToApplyImpulse * Time.fixedDeltaTime)).normalized;
+                playerRB.AddForce(newDir, ForceMode2D.Impulse);
+            }
+            else
+            {
+                newDir = new Vector2(0.0f, (1.0f * forceToApply * Time.fixedDeltaTime)).normalized;
+                playerRB.AddForce(newDir, ForceMode2D.Force);
+ 
+            }
             Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
         isPressed = controls.Move.MoveDown.IsPressed();
@@ -237,8 +290,18 @@ public class MainManager : MonoBehaviour
             //playerRB.linearVelocityX = forceToApply;
             //playerRB.linearVelocityX = -deltaMovement;
             //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
-            Vector2 newDir = new Vector2(0.0f, (-1.0f * forceToApply * Time.fixedDeltaTime)).normalized;
-            playerRB.AddForce(newDir, ForceMode2D.Force);
+            Vector2 newDir;
+            if (usePulseAcceleration)
+            {
+                newDir = new Vector2(0.0f, (-1.0f * forceToApplyImpulse * Time.fixedDeltaTime)).normalized;
+                playerRB.AddForce(newDir, ForceMode2D.Impulse);
+            }
+            else
+            {
+                newDir = new Vector2(0.0f, (-1.0f * forceToApply * Time.fixedDeltaTime)).normalized;
+                playerRB.AddForce(newDir, ForceMode2D.Force);
+
+            }
             Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
 
