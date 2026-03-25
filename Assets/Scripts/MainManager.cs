@@ -14,6 +14,7 @@ public class MainManager : MonoBehaviour
     public GameObject rightmostBorder;
     public GameObject bottommostBorder;
     public GameObject topmostBorder;
+    public bool autoToEditor = false;
     [Range(0.1f, 1.0f)]
     [Tooltip("Incremental range to move")]
     public float deltaMovement = 0.1f;
@@ -73,7 +74,7 @@ public class MainManager : MonoBehaviour
         startingLocations = GameObject.FindGameObjectsWithTag(tagToFind);
         if (startingLocations.Length > 0)
         {
-            int randomStart = UnityEngine.Random.Range(0, startingLocations.Length-1);
+            int randomStart = UnityEngine.Random.Range(0, startingLocations.Length - 1);
             // set player location to first start location
             Debug.Log($"Setting starting position to: {startingLocations[randomStart].name}");
             player.transform.SetPositionAndRotation(startingLocations[randomStart].transform.position, Quaternion.identity);
@@ -286,7 +287,10 @@ public class MainManager : MonoBehaviour
     public void EndGame()
     {
 #if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
+        if (autoToEditor)
+        {
+            EditorApplication.isPlaying = false;
+        }
         // If the game is a standalone build, quit the application
 #else
             Application.Quit();

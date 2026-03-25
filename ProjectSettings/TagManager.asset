@@ -12,6 +12,7 @@ TagManager:
   - WallPiece
   - PointObject
   - Enemy
+  - GuardDog
   layers:
   - Default
   - TransparentFX
@@ -63,3 +64,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  m_MigratedRenderPipelines: []

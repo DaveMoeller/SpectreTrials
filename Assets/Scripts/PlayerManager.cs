@@ -73,6 +73,12 @@ public class PlayerManager : MonoBehaviour
             Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
 
         }
+        if (collision.gameObject.CompareTag("GuardDog"))
+        {
+            Destroy(collision.gameObject);
+            MainManager.Instance.EndGame();
+
+        }
         if (collision.gameObject.CompareTag("PointObject"))
         {
             MainManager.Instance.IncrementScore(1);
