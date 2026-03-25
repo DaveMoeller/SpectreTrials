@@ -8513,7 +8513,7 @@ MonoBehaviour:
   bottommostBorder: {fileID: 384269065}
   topmostBorder: {fileID: 346125305}
   gameWorld: {fileID: 1827383865}
-  autoBackToEditor: 0
+  autoBackToEditor: 1
   deltaMovement: 0.1
   forceToApply: 1.04
   forceToApplyImpulse: 0.1
