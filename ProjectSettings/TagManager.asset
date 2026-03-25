@@ -52,5 +52,14 @@ TagManager:
   - name: SwitchLayer
     uniqueID: 9592445
     locked: 0
+  - name: Background
+    uniqueID: 2190895651
+    locked: 0
+  - name: Midground
+    uniqueID: 335351267
+    locked: 0
+  - name: Foreground
+    uniqueID: 562384097
+    locked: 0
   m_RenderingLayers:
   - Default
