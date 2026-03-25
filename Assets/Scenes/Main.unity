@@ -8515,7 +8515,7 @@ MonoBehaviour:
   gameWorld: {fileID: 1827383865}
   autoBackToEditor: 0
   deltaMovement: 0.1
-  forceToApply: 0.71
+  forceToApply: 1.04
   forceToApplyImpulse: 0.1
   uiDocument: {fileID: 124550704}
   cameraMain: {fileID: 519420031}
