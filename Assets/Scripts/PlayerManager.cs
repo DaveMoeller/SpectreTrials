@@ -120,12 +120,14 @@ public class PlayerManager : MonoBehaviour
             ParticleSystem ps = collision.gameObject.GetComponent<ParticleSystem>();
             var mainModule = ps.main;
             SpriteRenderer sr = collision.gameObject.GetComponent<SpriteRenderer>();
+            AudioSource audioSource = collision.gameObject.GetComponent<AudioSource>();
             float durationPS = mainModule.duration;
             //mainModule.playOnAwake = true;
             sr.enabled = false;
             BoxCollider2D collider = collision.gameObject.GetComponent<BoxCollider2D>();
             collider.enabled = false;
             ps.Play();
+            audioSource.Play();
             Destroy(collision.gameObject, durationPS);
             //Destroy(collision.gameObject);
 
