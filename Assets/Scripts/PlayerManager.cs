@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
             UnityEngine.Object:DontDestroyOnLoad (UnityEngine.Object)
             PlayerManager:Awake () (at Assets/Scripts/PlayerManager.cs:31)
             */
- //           DontDestroyOnLoad(Instance); // same as GameObject
+            //           DontDestroyOnLoad(Instance); // same as GameObject
 
         }
     }
@@ -75,14 +75,18 @@ public class PlayerManager : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("PointObject"))
         {
+            MainManager.Instance.IncrementScore(1);
             ParticleSystem ps = collision.gameObject.GetComponent<ParticleSystem>();
             var mainModule = ps.main;
+            SpriteRenderer sr = collision.gameObject.GetComponent<SpriteRenderer>();
             float durationPS = mainModule.duration;
             //mainModule.playOnAwake = true;
+            sr.enabled = false;
+            BoxCollider2D collider = collision.gameObject.GetComponent<BoxCollider2D>();
+            collider.enabled = false;
             ps.Play();
             Destroy(collision.gameObject, durationPS);
             //Destroy(collision.gameObject);
-            MainManager.Instance.IncrementScore(1);
 
         }
         if (collision.gameObject.name.Contains("LightSwitch"))
@@ -98,9 +102,29 @@ public class PlayerManager : MonoBehaviour
             SpriteRenderer renderer = collision.gameObject.GetComponent<SpriteRenderer>();
             if (renderer != null)
             {
-                 renderer.color = Color.cornflowerBlue;
+                renderer.color = Color.cornflowerBlue;
             }
         }
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PointObject"))
+        {
+            MainManager.Instance.IncrementScore(1);
+            ParticleSystem ps = collision.gameObject.GetComponent<ParticleSystem>();
+            var mainModule = ps.main;
+            SpriteRenderer sr = collision.gameObject.GetComponent<SpriteRenderer>();
+            float durationPS = mainModule.duration;
+            //mainModule.playOnAwake = true;
+            sr.enabled = false;
+            BoxCollider2D collider = collision.gameObject.GetComponent<BoxCollider2D>();
+            collider.enabled = false;
+            ps.Play();
+            Destroy(collision.gameObject, durationPS);
+            //Destroy(collision.gameObject);
+
+        }
+
     }
 
 }
