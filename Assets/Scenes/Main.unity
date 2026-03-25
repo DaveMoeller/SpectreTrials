@@ -8516,6 +8516,7 @@ MonoBehaviour:
   deltaMovement: 0.1
   forceToApply: 1.5
   uiDocument: {fileID: 124550704}
+  gameWorld: {fileID: 1827383865}
   cameraMain: {fileID: 519420031}
   cameraPlayer: {fileID: 796456606}
   tagsToTurnOnForSwitch:
