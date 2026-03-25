@@ -3042,6 +3042,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -8023,9 +8024,11 @@ MonoBehaviour:
   rightmostBorder: {fileID: 598538042}
   bottommostBorder: {fileID: 384269065}
   topmostBorder: {fileID: 346125305}
+  autoBackToEditor: 1
   deltaMovement: 0.1
   forceToApply: 1.5
   uiDocument: {fileID: 124550704}
+  gameWorld: {fileID: 1827383865}
   cameraMain: {fileID: 519420031}
   cameraPlayer: {fileID: 796456606}
   tagsToTurnOnForSwitch:
