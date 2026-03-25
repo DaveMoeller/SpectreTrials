@@ -25,10 +25,8 @@ public class MainManager : MonoBehaviour
     public float forceToApply = 1.5f;
     Rigidbody2D playerRB;
     public UIDocument uiDocument;
-    public GameObject gameWorld;
     private Label timeText;
     private Label scoreText;
-    private Label gameOverText;
     private float gameTimeInSeconds;
     private static Camera m_cameraMain = null;
     private static Camera m_cameraPlayer = null;

@@ -8516,7 +8516,6 @@ MonoBehaviour:
   deltaMovement: 0.1
   forceToApply: 1.5
   uiDocument: {fileID: 124550704}
-  gameWorld: {fileID: 1827383865}
   cameraMain: {fileID: 519420031}
   cameraPlayer: {fileID: 796456606}
   tagsToTurnOnForSwitch:
@@ -15474,6 +15473,10 @@ PrefabInstance:
     - target: {fileID: 2808114298535682094, guid: a4f12053da2a02042b666fccfe2e7b1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872265971487402283, guid: a4f12053da2a02042b666fccfe2e7b1f, type: 3}
+      propertyPath: wayPoints.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2872265971487402283, guid: a4f12053da2a02042b666fccfe2e7b1f, type: 3}
       propertyPath: 'wayPoints.Array.data[0]'
