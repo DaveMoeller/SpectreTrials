@@ -8511,6 +8511,8 @@ MonoBehaviour:
   rightmostBorder: {fileID: 598538042}
   bottommostBorder: {fileID: 384269065}
   topmostBorder: {fileID: 346125305}
+  gameWorld: {fileID: 1827383865}
+  autoBackToEditor: 0
   deltaMovement: 0.1
   forceToApply: 1.5
   uiDocument: {fileID: 124550704}
@@ -10393,7 +10395,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1075369416605840229, guid: be21230c0f3f44d45aecbd1611ac3900, type: 3}
       propertyPath: m_Name
-      value: StartLocation06 (1)
+      value: StartLocation07
       objectReference: {fileID: 0}
     - target: {fileID: 1075369416605840229, guid: be21230c0f3f44d45aecbd1611ac3900, type: 3}
       propertyPath: m_TagString

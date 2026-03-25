@@ -8,4 +8,7 @@
     <ui:Label text="HighScore 01" name="HighScoreText01" style="font-size: 16px; padding-right: 11px; margin-left: 27px; color: rgb(145, 87, 10);"/>
     <ui:Label text="HighScore 02" name="HighScoreText02" style="font-size: 16px; padding-right: 11px; margin-left: 27px;"/>
     <ui:Label text="HighScore 03" name="HighScoreText03" style="font-size: 16px; padding-right: 11px; margin-left: 27px;"/>
+	
+<ui:Label text="Game Over!&#10;Better Luck Next Time!" name="GameOverText" style="font-size: 40px; -unity-font-style: bold; -unity-text-outline-color: rgb(30, 122, 37); color: rgb(5, 184, 169); align-self: center; align-items: center; justify-content: flex-end; -unity-text-align: upper-center; visibility: hidden;"/>
+ 
 </ui:UXML>

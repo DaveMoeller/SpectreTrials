@@ -14,7 +14,9 @@ public class MainManager : MonoBehaviour
     public GameObject rightmostBorder;
     public GameObject bottommostBorder;
     public GameObject topmostBorder;
-    public bool autoToEditor = false;
+    public GameObject gameWorld;
+    public bool autoBackToEditor = false;
+    private Label gameOverText;
     [Range(0.1f, 1.0f)]
     [Tooltip("Incremental range to move")]
     public float deltaMovement = 0.1f;
@@ -286,8 +288,21 @@ public class MainManager : MonoBehaviour
     }
     public void EndGame()
     {
+        // Turn off GameWorld
+
+        gameWorld.SetActive(false);
+
+        // Display GameOverText
+
+        gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
+
+        gameOverText.visible = true;
+
+        // GameOverText
+        if (autoBackToEditor) { EditorApplication.isPlaying = false; }
 #if UNITY_EDITOR
-        if (autoToEditor)
+        if (autoBackToEditor)
+
         {
             EditorApplication.isPlaying = false;
         }
