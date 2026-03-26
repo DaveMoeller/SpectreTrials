@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class MainManager : MonoBehaviour
 {
+    [SerializeField] public SoundType pointSound;
+    [SerializeField, Range(0f, 1f)] public float pointVolume = 0.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static MainManager Instance;
     private static PlayerControl controls; // Reference to the generated class

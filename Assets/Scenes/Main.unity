@@ -7364,10 +7364,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1683136182}
     m_Modifications:
-    - target: {fileID: 1430459124564056413, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
       value: PointObject
@@ -8864,6 +8860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b322a5cbe7062e54c93ad0ab64f5b3c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainManager
+  pointSound: 0
+  pointVolume: 0.5
   player: {fileID: 1980717711}
   leftmostBorder: {fileID: 1950195581}
   rightmostBorder: {fileID: 598538042}

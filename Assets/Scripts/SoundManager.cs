@@ -3,8 +3,8 @@ using UnityEngine;
 
 public enum SoundType
 {
+    POINT,
     Crickets,
-    Point,
     DogBark,
     PlayerWalk,
     PlayerRun
@@ -28,6 +28,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
     }
+
     public static void PlaySound(SoundType soundType)
     {
         Debug.Log($"SoundType: {(int)soundType}");
@@ -35,8 +36,27 @@ public class SoundManager : MonoBehaviour
         {
             if (instance.audioSource != null)
             {
-             instance.audioSource.PlayOneShot(instance.soundList[(int)soundType], instance.audioSource.volume);
-           }
+                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType], instance.audioSource.volume);
+            }
+            else
+            {
+                Debug.LogError("instance.audioSource instance is null");
+            }
+        }
+        else
+        {
+            Debug.LogError("SoundManager instance is null");
+        }
+    }
+    public static void PlaySound(SoundType soundType, float volume)
+    {
+        Debug.Log($"SoundType: {(int)soundType}");
+        if (instance != null)
+        {
+            if (instance.audioSource != null)
+            {
+                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType], volume);
+            }
             else
             {
                 Debug.LogError("instance.audioSource instance is null");

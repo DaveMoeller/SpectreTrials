@@ -129,7 +129,7 @@ public class PlayerManager : MonoBehaviour
             collider.enabled = false;
             ps.Play();
             //audioSource.Play();
-            SoundManager.PlaySound(SoundType.Crickets);
+            SoundManager.PlaySound(MainManager.Instance.pointSound, MainManager.Instance.pointVolume);
             Destroy(collision.gameObject, durationPS);
             //Destroy(collision.gameObject);
 
