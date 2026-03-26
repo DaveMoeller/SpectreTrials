@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerControl controls; // Reference to the generated class
@@ -36,12 +37,6 @@ public class PlayerManager : MonoBehaviour
             //           DontDestroyOnLoad(Instance); // same as GameObject
 
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -86,18 +81,16 @@ public class PlayerManager : MonoBehaviour
             var mainModule = ps.main;
             SpriteRenderer sr = collision.gameObject.GetComponent<SpriteRenderer>();
             float durationPS = mainModule.duration;
-            //mainModule.playOnAwake = true;
             sr.enabled = false;
             BoxCollider2D collider = collision.gameObject.GetComponent<BoxCollider2D>();
             collider.enabled = false;
             ps.Play();
             Destroy(collision.gameObject, durationPS);
-            //Destroy(collision.gameObject);
 
         }
         if (collision.gameObject.name.Contains("LightSwitch"))
         {
-            MainManager.Instance.setObjectsVisible(true);
+            MainManager.Instance.SetObjectsVisible(true);
             MainManager.Instance.CreatePointObjects();
             Destroy(collision.gameObject, 0.1f);
         }
@@ -106,10 +99,13 @@ public class PlayerManager : MonoBehaviour
             //Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
             //Change the color
             //collision.gameObject
-            SpriteRenderer renderer = collision.gameObject.GetComponent<SpriteRenderer>();
-            if (renderer != null)
+            if (collision.gameObject.TryGetComponent<SpriteRenderer>(out var renderer))
             {
                 renderer.color = Color.cornflowerBlue;
+            }
+            else
+            {
+                Debug.LogError("renderer is null!");
             }
         }
     }
@@ -121,17 +117,13 @@ public class PlayerManager : MonoBehaviour
             ParticleSystem ps = collision.gameObject.GetComponent<ParticleSystem>();
             var mainModule = ps.main;
             SpriteRenderer sr = collision.gameObject.GetComponent<SpriteRenderer>();
-            AudioSource audioSource = collision.gameObject.GetComponent<AudioSource>();
             float durationPS = mainModule.duration;
-            //mainModule.playOnAwake = true;
             sr.enabled = false;
             BoxCollider2D collider = collision.gameObject.GetComponent<BoxCollider2D>();
             collider.enabled = false;
             ps.Play();
-            //audioSource.Play();
             SoundManager.PlaySound(MainManager.Instance.pointSound, MainManager.Instance.pointVolume);
             Destroy(collision.gameObject, durationPS);
-            //Destroy(collision.gameObject);
 
         }
 

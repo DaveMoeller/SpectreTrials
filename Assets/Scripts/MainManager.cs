@@ -41,7 +41,7 @@ public class MainManager : MonoBehaviour
     GameObject[] startingLocations;
     private int currentStartingLocation = 0;
     public String[] tagsToTurnOnForSwitch;
-    private string tagToFind = "StartLocation";
+    private readonly string tagToFind = "StartLocation";
     [Tooltip("Object to hit and get points.")]
     public GameObject pointObject;
     private int CurrentScore = 0;
@@ -114,10 +114,10 @@ public class MainManager : MonoBehaviour
         {
             cameraPlayer = m_cameraPlayer;
         }
-        setObjectsVisible(false);
+        SetObjectsVisible(false);
         root = uiDocument.rootVisualElement;
     }
-    public void setObjectsVisible(bool visible)
+    public void SetObjectsVisible(bool visible)
     {
         //Switch objects with tags off - to be turned on later with object hit
         if (tagsToTurnOnForSwitch.Length > 0)
@@ -156,7 +156,7 @@ public class MainManager : MonoBehaviour
             isPressed = controls.GamePlay.Talk.WasPressedThisFrame();
             if (isPressed)
             {
-                SoundManager.PlaySound(SoundType.Crickets);
+                SoundManager.PlaySound(SoundType.CRICKETS);
             }
 
             //Reload the game
@@ -211,10 +211,8 @@ public class MainManager : MonoBehaviour
         if (isPressed)
         {
             Debug.Log("MoveLeft pressed!");
-            Vector3 pos, borderPos;
-            Quaternion rotation, borderRotation;
-            player.transform.GetPositionAndRotation(out pos, out rotation);
-            leftmostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
+            player.transform.GetPositionAndRotation(out Vector3 pos, out _);
+            leftmostBorder.transform.GetPositionAndRotation(out Vector3 borderPos, out _);
             Debug.Log($"pos: {pos}, borderPos: {borderPos}");
             Vector2 newDir;
             if (usePulseAcceleration)
@@ -321,13 +319,13 @@ public class MainManager : MonoBehaviour
         float startX = -14.0f, startY = 30.75f;
         float endX = 13.0f, endY = 5.25f;
         Vector3 poScale = pointObject.transform.localScale;
-        Vector2 boxSize = new Vector2(poScale.x, poScale.y);
+        Vector2 boxSize = new(poScale.x, poScale.y);
 
-        for (x = startX; x <= endX; x = x + incrementX)
+        for (x = startX; x <= endX; x += incrementX)
         {
-            for (y = startY; y >= endY; y = y + incrementY)
+            for (y = startY; y >= endY; y += incrementY)
             {
-                Vector2 pos = new Vector2(x, y);
+                Vector2 pos = new(x, y);
                 //x = -14.75f; y = 19.25f;
                 Debug.Log($"Trying to instantiate at {pos}");
                 if (!Physics2D.OverlapBox(pos, boxSize, 0.0f))

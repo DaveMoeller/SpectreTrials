@@ -4,10 +4,11 @@ using UnityEngine;
 public enum SoundType
 {
     POINT,
-    Crickets,
-    DogBark,
-    PlayerWalk,
-    PlayerRun
+    CRICKETS,
+    DOGBARK,
+    PLAYERWALK,
+    PLAYERRUN,
+    ENDGAME
 }
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
