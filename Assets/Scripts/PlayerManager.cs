@@ -128,7 +128,8 @@ public class PlayerManager : MonoBehaviour
             BoxCollider2D collider = collision.gameObject.GetComponent<BoxCollider2D>();
             collider.enabled = false;
             ps.Play();
-            audioSource.Play();
+            //audioSource.Play();
+            SoundManager.PlaySound(SoundType.Crickets);
             Destroy(collision.gameObject, durationPS);
             //Destroy(collision.gameObject);
 

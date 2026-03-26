@@ -151,6 +151,12 @@ public class MainManager : MonoBehaviour
                 }
                 player.transform.SetPositionAndRotation(startingLocations[currentStartingLocation].transform.position, Quaternion.identity);
             }
+            isPressed = controls.GamePlay.Talk.WasPressedThisFrame();
+            if (isPressed)
+            {
+                SoundManager.PlaySound(SoundType.Crickets);
+            }
+
             //Reload the game
             isPressed = controls.GamePlay.GameStart.IsPressed();
             if (isPressed)
