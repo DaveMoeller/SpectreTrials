@@ -8515,7 +8515,7 @@ MonoBehaviour:
   gameWorld: {fileID: 1827383865}
   autoBackToEditor: 1
   deltaMovement: 0.1
-  forceToApply: 1.04
+  forceToApply: 0.15
   forceToApplyImpulse: 0.1
   uiDocument: {fileID: 124550704}
   cameraMain: {fileID: 519420031}
@@ -8527,6 +8527,8 @@ MonoBehaviour:
   eyes: {fileID: 1392173653}
   eyeMoveAmount: 0.03
   usePulseAcceleration: 0
+  pointObjectIncrementX: 0.25
+  pointObjectIncrementY: -0.25
 --- !u!4 &1233191729
 Transform:
   m_ObjectHideFlags: 0

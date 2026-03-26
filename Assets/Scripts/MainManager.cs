@@ -47,6 +47,10 @@ public class MainManager : MonoBehaviour
     public GameObject eyes;
     public float eyeMoveAmount = 0.03f;
     public bool usePulseAcceleration = false;
+    [Range(.1f, 2.0f)]
+    public float pointObjectIncrementX = 1.0f;
+    [Range(-2.0f, -0.1f)]
+    public float pointObjectIncrementY = -1.0f;
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -128,12 +132,6 @@ public class MainManager : MonoBehaviour
                 }
             }
         }
-        if (visible)
-        {
-            CreatePointObjects();
-
-        }
-
     }
     private void Update()
     {
@@ -279,7 +277,7 @@ public class MainManager : MonoBehaviour
             {
                 newDir = new Vector2(0.0f, (1.0f * forceToApply * Time.fixedDeltaTime)).normalized;
                 playerRB.AddForce(newDir, ForceMode2D.Force);
- 
+
             }
             Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
@@ -306,23 +304,23 @@ public class MainManager : MonoBehaviour
         }
 
     }
-    private void CreatePointObjects()
+    public void CreatePointObjects()
     {
         //Instantiate point objects in gamespace
         float x, y;
-        float incrementX = 1.0f;
-        float incrementY = -1.50f;
+        float incrementX = pointObjectIncrementX;
+        float incrementY = pointObjectIncrementY;
         float startX = -14.0f, startY = 30.75f;
         float endX = 13.0f, endY = 5.25f;
+        Vector3 poScale = pointObject.transform.localScale;
+        Vector2 boxSize = new Vector2(poScale.x, poScale.y);
 
         for (x = startX; x <= endX; x = x + incrementX)
         {
             for (y = startY; y >= endY; y = y + incrementY)
             {
-                //x = -14.75f; y = 19.25f;
-                Vector3 poScale = pointObject.transform.localScale;
                 Vector2 pos = new Vector2(x, y);
-                Vector2 boxSize = new Vector2(poScale.x, poScale.y);
+                //x = -14.75f; y = 19.25f;
                 Debug.Log($"Trying to instantiate at {pos}");
                 if (!Physics2D.OverlapBox(pos, boxSize, 0.0f))
                 {
@@ -362,7 +360,7 @@ public class MainManager : MonoBehaviour
         gameOverText.visible = true;
 
         // GameOverText
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (autoBackToEditor)
 
         {
