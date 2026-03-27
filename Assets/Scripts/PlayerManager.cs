@@ -122,7 +122,8 @@ public class PlayerManager : MonoBehaviour
             BoxCollider2D collider = collision.gameObject.GetComponent<BoxCollider2D>();
             collider.enabled = false;
             ps.Play();
-            SoundManager.PlaySound(MainManager.Instance.pointSound, MainManager.Instance.pointVolume);
+            //SoundManager.PlaySound(MainManager.Instance.pointSound, MainManager.Instance.pointVolume);
+            SoundManager.PlaySound(MainManager.Instance.pointSound);
             Destroy(collision.gameObject, durationPS);
 
         }

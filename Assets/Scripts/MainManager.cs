@@ -55,6 +55,8 @@ public class MainManager : MonoBehaviour
     public float pointObjectIncrementX = 1.0f;
     [Range(-2.0f, -0.1f)]
     public float pointObjectIncrementY = -1.0f;
+    public string looseText = "Sorry about your skills!\nPlease try again to improve\nGame Over!";
+    public string winText = "Great Job!\nPlease play again soon!\nGame Over!";
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -355,15 +357,31 @@ public class MainManager : MonoBehaviour
     public void EndGame()
     {
         // Turn off GameWorld
-        SoundManager.PlaySound(Instance.exitSound, Instance.pointVolume);
 
         gameWorld.SetActive(false);
-
+        int numberOfPointObjectsLeft = GameObject.FindGameObjectsWithTag("PointObject").Length;
         // Display GameOverText
+        //If points left then loose, else win
 
-        gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
+        if (numberOfPointObjectsLeft > 0)
+        {
+
+            gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
+            gameOverText.text = looseText;
+            SoundManager.PlaySound(SoundType.ENDGAMELOOSE);
+
+        }
+        else
+        {
+            gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
+            gameOverText.text = winText;
+            SoundManager.PlaySound(SoundType.ENDGAMEWIN);
+
+        }
 
         gameOverText.visible = true;
+
+
 
         // GameOverText
 #if UNITY_EDITOR

@@ -59,7 +59,7 @@ public class SoundManager : MonoBehaviour
         {
             if (instance.audioSource != null)
             {
-                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType].sound, instance.soundList[(int)soundType].volume);
+                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType].sound, volume);
             }
             else
             {

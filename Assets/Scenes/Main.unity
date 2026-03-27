@@ -8822,7 +8822,7 @@ MonoBehaviour:
   bottommostBorder: {fileID: 384269065}
   topmostBorder: {fileID: 346125305}
   gameWorld: {fileID: 1827383865}
-  autoBackToEditor: 1
+  autoBackToEditor: 0
   deltaMovement: 0.1
   forceToApply: 0.15
   forceToApplyImpulse: 0.1
@@ -8838,6 +8838,17 @@ MonoBehaviour:
   usePulseAcceleration: 0
   pointObjectIncrementX: 0.25
   pointObjectIncrementY: -0.25
+  looseText: 'Sorry about your skills!
+
+    Please try again to improve
+
+    Game
+    Over!'
+  winText: 'Great Job!
+
+    Please play again soon!
+
+    Game Over!'
 --- !u!4 &1233191729
 Transform:
   m_ObjectHideFlags: 0
