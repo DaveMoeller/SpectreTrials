@@ -6,6 +6,10 @@ using UnityEngine.UIElements;
 
 public class MainManager : MonoBehaviour
 {
+    public SoundType pointSound;
+    [Range(0.0f, 1.0f)] public float pointVolume = 0.5f;
+    public SoundType exitSound;
+    [Range(0.0f, 1.0f)] public float exitVolume = 0.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static MainManager Instance;
     private static PlayerControl controls; // Reference to the generated class
@@ -39,7 +43,7 @@ public class MainManager : MonoBehaviour
     GameObject[] startingLocations;
     private int currentStartingLocation = 0;
     public String[] tagsToTurnOnForSwitch;
-    private string tagToFind = "StartLocation";
+    private readonly string tagToFind = "StartLocation";
     [Tooltip("Object to hit and get points.")]
     public GameObject pointObject;
     private int CurrentScore = 0;
@@ -51,6 +55,8 @@ public class MainManager : MonoBehaviour
     public float pointObjectIncrementX = 1.0f;
     [Range(-2.0f, -0.1f)]
     public float pointObjectIncrementY = -1.0f;
+    public string looseText = "Sorry about your skills!\nPlease try again to improve\nGame Over!";
+    public string winText = "Great Job!\nPlease play again soon!\nGame Over!";
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -112,10 +118,10 @@ public class MainManager : MonoBehaviour
         {
             cameraPlayer = m_cameraPlayer;
         }
-        setObjectsVisible(false);
+        SetObjectsVisible(false);
         root = uiDocument.rootVisualElement;
     }
-    public void setObjectsVisible(bool visible)
+    public void SetObjectsVisible(bool visible)
     {
         //Switch objects with tags off - to be turned on later with object hit
         if (tagsToTurnOnForSwitch.Length > 0)
@@ -151,15 +157,18 @@ public class MainManager : MonoBehaviour
                 }
                 player.transform.SetPositionAndRotation(startingLocations[currentStartingLocation].transform.position, Quaternion.identity);
             }
+            isPressed = controls.GamePlay.Talk.WasPressedThisFrame();
+            if (isPressed)
+            {
+                SoundManager.PlaySound(SoundType.CRICKETS);
+            }
+
             //Reload the game
             isPressed = controls.GamePlay.GameStart.IsPressed();
             if (isPressed)
             {
                 Debug.Log("Start Selected!");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                cameraPlayer = m_cameraPlayer;
-                cameraMain = m_cameraMain;
-                //Reset();
                 return;
             }
             isPressed = controls.Camera.CameraButton.WasPressedThisFrame();
@@ -203,10 +212,8 @@ public class MainManager : MonoBehaviour
         if (isPressed)
         {
             Debug.Log("MoveLeft pressed!");
-            Vector3 pos, borderPos;
-            Quaternion rotation, borderRotation;
-            player.transform.GetPositionAndRotation(out pos, out rotation);
-            leftmostBorder.transform.GetPositionAndRotation(out borderPos, out borderRotation);
+            player.transform.GetPositionAndRotation(out Vector3 pos, out _);
+            leftmostBorder.transform.GetPositionAndRotation(out Vector3 borderPos, out _);
             Debug.Log($"pos: {pos}, borderPos: {borderPos}");
             Vector2 newDir;
             if (usePulseAcceleration)
@@ -313,13 +320,13 @@ public class MainManager : MonoBehaviour
         float startX = -14.0f, startY = 30.75f;
         float endX = 13.0f, endY = 5.25f;
         Vector3 poScale = pointObject.transform.localScale;
-        Vector2 boxSize = new Vector2(poScale.x, poScale.y);
+        Vector2 boxSize = new(poScale.x, poScale.y);
 
-        for (x = startX; x <= endX; x = x + incrementX)
+        for (x = startX; x <= endX; x += incrementX)
         {
-            for (y = startY; y >= endY; y = y + incrementY)
+            for (y = startY; y >= endY; y += incrementY)
             {
-                Vector2 pos = new Vector2(x, y);
+                Vector2 pos = new(x, y);
                 //x = -14.75f; y = 19.25f;
                 Debug.Log($"Trying to instantiate at {pos}");
                 if (!Physics2D.OverlapBox(pos, boxSize, 0.0f))
@@ -352,12 +359,29 @@ public class MainManager : MonoBehaviour
         // Turn off GameWorld
 
         gameWorld.SetActive(false);
-
+        int numberOfPointObjectsLeft = GameObject.FindGameObjectsWithTag("PointObject").Length;
         // Display GameOverText
+        //If points left then loose, else win
 
-        gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
+        if (numberOfPointObjectsLeft > 0)
+        {
+
+            gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
+            gameOverText.text = looseText;
+            SoundManager.PlaySound(SoundType.ENDGAMELOOSE);
+
+        }
+        else
+        {
+            gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
+            gameOverText.text = winText;
+            SoundManager.PlaySound(SoundType.ENDGAMEWIN);
+
+        }
 
         gameOverText.visible = true;
+
+
 
         // GameOverText
 #if UNITY_EDITOR
