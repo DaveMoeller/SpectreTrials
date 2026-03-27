@@ -102,6 +102,7 @@ public class PlayerManager : MonoBehaviour
             if (collision.gameObject.TryGetComponent<SpriteRenderer>(out var renderer))
             {
                 renderer.color = Color.cornflowerBlue;
+                renderer.enabled = true;
             }
             else
             {
