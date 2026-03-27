@@ -65,6 +65,7 @@ public class PlayerManager : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Key"))
         {
+            //Remove container
             Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
 
         }

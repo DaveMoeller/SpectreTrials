@@ -2639,7 +2639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 481414381}
   m_Layer: 0
-  m_Name: StartExit
+  m_Name: StartLocations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4669,7 +4669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9210880997407578042, guid: 851ce7c59595b754c87d714620da4b19, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8573,7 +8573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9210880997407578042, guid: 851ce7c59595b754c87d714620da4b19, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8844,6 +8844,7 @@ MonoBehaviour:
   tagsToTurnOnForSwitch:
   - LightGroup01
   - LightGroup02
+  - Key
   pointObject: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
   eyes: {fileID: 1392173653}
   eyeMoveAmount: 0.03
@@ -9494,7 +9495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9210880997407578042, guid: 851ce7c59595b754c87d714620da4b19, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9622,7 +9623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9210880997407578042, guid: 851ce7c59595b754c87d714620da4b19, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12777,7 +12778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9210880997407578042, guid: 851ce7c59595b754c87d714620da4b19, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15874,7 +15875,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 467484587603076685, guid: 0b5c79a0448156c4aa22898da2d90e8c, type: 3}
       propertyPath: m_TagString
-      value: LightGroup01
+      value: Key
+      objectReference: {fileID: 0}
+    - target: {fileID: 630545252800288138, guid: 0b5c79a0448156c4aa22898da2d90e8c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 630545252800288138, guid: 0b5c79a0448156c4aa22898da2d90e8c, type: 3}
       propertyPath: m_DrawMode
@@ -16254,10 +16259,6 @@ PrefabInstance:
     - target: {fileID: 8901282675450597378, guid: 851ce7c59595b754c87d714620da4b19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9210880997407578042, guid: 851ce7c59595b754c87d714620da4b19, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
