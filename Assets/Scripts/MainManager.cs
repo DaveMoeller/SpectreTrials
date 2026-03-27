@@ -332,7 +332,7 @@ public class MainManager : MonoBehaviour
                 Debug.Log($"Trying to instantiate at {pos}");
                 if (!Physics2D.OverlapBox(pos, boxSize, 0.0f))
                 {
-                    Instantiate(pointObject, pos, Quaternion.identity);
+                    Instantiate(pointObject, pos, Quaternion.identity, gameWorld.transform);
                     Debug.Log("Object spawned in empty space!");
                 }
                 else
