@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: -7389175502734908446}
   - component: {fileID: -1996176881364466828}
   - component: {fileID: 1430459124564056413}
-  - component: {fileID: 1437821666544561685}
   m_Layer: 0
   m_Name: PointObject
   m_TagString: PointObject
@@ -5042,34 +5041,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1437821666544561685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6986722981952113311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8c03c3e6d6671b43b3f565925c540f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  soundList:
-  - name: POINT
-    sounds:
-    - {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
-  - name: CRICKETS
-    sounds:
-    - {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
-  - name: DOGBARK
-    sounds:
-    - {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
-  - name: PLAYERWALK
-    sounds:
-    - {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
-  - name: PLAYERRUN
-    sounds:
-    - {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
-  - name: ENDGAME
-    sounds:
-    - {fileID: 8300000, guid: 84e427d6b66ab4066b6a4dcd0ce819ee, type: 3}

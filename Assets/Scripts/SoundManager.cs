@@ -8,7 +8,10 @@ public enum SoundType
     DOGBARK,
     PLAYERWALK,
     PLAYERRUN,
-    ENDGAME
+    ENDGAME,
+    ENDGAMEWIN,
+    ENDGAMELOOSE,
+    ENEMY
 }
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
 public class SoundManager : MonoBehaviour
@@ -37,7 +40,7 @@ public class SoundManager : MonoBehaviour
         {
             if (instance.audioSource != null)
             {
-                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType].sounds[0], instance.audioSource.volume);
+                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType].sound, instance.soundList[(int)soundType].volume);
             }
             else
             {
@@ -56,7 +59,7 @@ public class SoundManager : MonoBehaviour
         {
             if (instance.audioSource != null)
             {
-                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType].sounds[0], volume);
+                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType].sound, instance.soundList[(int)soundType].volume);
             }
             else
             {
@@ -76,11 +79,11 @@ public class SoundManager : MonoBehaviour
     private void OnEnable()
     {
         string[] names = Enum.GetNames(typeof(SoundType));
-        Debug.Log($"names= {names}");
+        Debug.Log($"names= {names}, length={names.Length}");
         Array.Resize(ref soundList, names.Length);
         for (int i = 0; i < soundList.Length; i++)
         {
-            Debug.Log($"names[i]= {names[i]}");
+            Debug.Log($"names[{i}]= {names[i]}");
             soundList[i].name = names[i];
         }
     }
@@ -93,5 +96,6 @@ public class SoundManager : MonoBehaviour
 public struct SoundList
 {
     [HideInInspector] public string name;
-    [SerializeField] public AudioClip[] sounds;
+    [SerializeField] public AudioClip sound;
+    [SerializeField,Range(0.0f,1.0f)] public float volume;
 }

@@ -3587,18 +3587,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   soundList:
   - name: POINT
-    sounds: []
+    sound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+    volume: 0.5
   - name: CRICKETS
-    sounds: []
+    sound: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
+    volume: 0.119
   - name: DOGBARK
-    sounds: []
+    sound: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
+    volume: 0.291
   - name: PLAYERWALK
-    sounds: []
+    sound: {fileID: 8300000, guid: 72127805eb2bc4e7fbf2e02eca266cfa, type: 3}
+    volume: 0.65
   - name: PLAYERRUN
-    sounds: []
+    sound: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
+    volume: 0.693
   - name: ENDGAME
-    sounds:
-    - {fileID: 8300000, guid: 89e6bc608da7b47d4914f3d9c2484e48, type: 3}
+    sound: {fileID: 8300000, guid: 657578e4be6b64dbf9b09deada272e55, type: 3}
+    volume: 0.553
+  - name: ENDGAMEWIN
+    sound: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
+    volume: 0.587
+  - name: ENDGAMELOOSE
+    sound: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+    volume: 0.726
+  - name: ENEMY
+    sound: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+    volume: 0.571
 --- !u!1001 &573799541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8799,9 +8813,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainManager
   pointSound: 0
-  pointVolume: 0.5
+  pointVolume: 1
   exitSound: 5
-  exitVolume: 0.5
+  exitVolume: 1
   player: {fileID: 1980717711}
   leftmostBorder: {fileID: 1950195581}
   rightmostBorder: {fileID: 598538042}
@@ -9309,6 +9323,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1683136182}
     m_Modifications:
     - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: soundList.Array.data[0].name
       value: POINT
       objectReference: {fileID: 0}
@@ -9331,6 +9349,18 @@ PrefabInstance:
     - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: soundList.Array.data[5].name
       value: ENDGAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[6].name
+      value: ENDGAMEWIN
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[7].name
+      value: ENDGAMELOOSE
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[8].name
+      value: ENEMY
       objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
@@ -11392,6 +11422,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1683136182}
     m_Modifications:
     - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: soundList.Array.data[0].name
       value: POINT
       objectReference: {fileID: 0}
@@ -11414,6 +11448,18 @@ PrefabInstance:
     - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: soundList.Array.data[5].name
       value: ENDGAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[6].name
+      value: ENDGAMEWIN
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[7].name
+      value: ENDGAMELOOSE
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[8].name
+      value: ENEMY
       objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
@@ -14565,6 +14611,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1683136182}
     m_Modifications:
     - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: soundList.Array.data[0].name
       value: POINT
       objectReference: {fileID: 0}
@@ -14587,6 +14637,18 @@ PrefabInstance:
     - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: soundList.Array.data[5].name
       value: ENDGAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[6].name
+      value: ENDGAMEWIN
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[7].name
+      value: ENDGAMELOOSE
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[8].name
+      value: ENEMY
       objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
