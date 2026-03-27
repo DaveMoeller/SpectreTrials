@@ -3567,7 +3567,7 @@ Transform:
   m_GameObject: {fileID: 568912736}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.41777, y: 7.59654, z: 0}
+  m_LocalPosition: {x: -2.1999998, y: 0.19999981, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7318,7 +7318,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
-      value: PointObject
+      value: PointObjectCenter
       objectReference: {fileID: 0}
     - target: {fileID: 8948589861418157441, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8840,7 +8840,7 @@ MonoBehaviour:
   pointObjectIncrementY: -0.25
   looseText: 'Sorry about your skills!
 
-    Please try again to improve
+    Please try again to improve!
 
     Game
     Over!'
@@ -9375,7 +9375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
-      value: PointObject (1)
+      value: PointObjectTopLeft
       objectReference: {fileID: 0}
     - target: {fileID: 8948589861418157441, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11474,7 +11474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
-      value: PointObject (2)
+      value: PointObjectTopRight
       objectReference: {fileID: 0}
     - target: {fileID: 8948589861418157441, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14663,7 +14663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
-      value: PointObject (3)
+      value: PointObjectBottomRight
       objectReference: {fileID: 0}
     - target: {fileID: 8948589861418157441, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_LocalPosition.x
