@@ -1,6 +1,6 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
+using System;
 public enum SoundType
 {
     POINT,
@@ -10,7 +10,7 @@ public enum SoundType
     PLAYERRUN,
     ENDGAME
 }
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
 public class SoundManager : MonoBehaviour
 {
     [Tooltip("Make the element num ber the same as the enum SoundType length.")]
@@ -72,5 +72,26 @@ public class SoundManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
     }
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        string[] names = Enum.GetNames(typeof(SoundType));
+        Debug.Log($"names= {names}");
+        Array.Resize(ref soundList, names.Length);
+        for (int i = 0; i < soundList.Length; i++)
+        {
+            Debug.Log($"names[i]= {names[i]}");
+            soundList[i].name = names[i];
+        }
+    }
 
+#endif
+
+}
+
+[Serializable]
+public struct SoundList
+{
+    [HideInInspector] public string name;
+    [SerializeField] private AudioClip[] sounds;
 }

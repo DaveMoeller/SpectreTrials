@@ -6,8 +6,8 @@ using UnityEngine.UIElements;
 
 public class MainManager : MonoBehaviour
 {
-    [SerializeField] public SoundType pointSound;
-    [SerializeField, Range(0f, 1f)] public float pointVolume = 0.5f;
+    public SoundType pointSound;
+    [Range(0.0f, 1.0f)] public float pointVolume = 0.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static MainManager Instance;
     private static PlayerControl controls; // Reference to the generated class
@@ -165,9 +165,6 @@ public class MainManager : MonoBehaviour
             {
                 Debug.Log("Start Selected!");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                cameraPlayer = m_cameraPlayer;
-                cameraMain = m_cameraMain;
-                //Reset();
                 return;
             }
             isPressed = controls.Camera.CameraButton.WasPressedThisFrame();
