@@ -8,6 +8,8 @@ public class MainManager : MonoBehaviour
 {
     public SoundType pointSound;
     [Range(0.0f, 1.0f)] public float pointVolume = 0.5f;
+    public SoundType exitSound;
+    [Range(0.0f, 1.0f)] public float exitVolume = 0.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static MainManager Instance;
     private static PlayerControl controls; // Reference to the generated class
@@ -353,6 +355,7 @@ public class MainManager : MonoBehaviour
     public void EndGame()
     {
         // Turn off GameWorld
+        SoundManager.PlaySound(Instance.exitSound, Instance.pointVolume);
 
         gameWorld.SetActive(false);
 

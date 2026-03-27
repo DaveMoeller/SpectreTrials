@@ -14,7 +14,7 @@ public enum SoundType
 public class SoundManager : MonoBehaviour
 {
     [Tooltip("Make the element num ber the same as the enum SoundType length.")]
-    [SerializeField] private AudioClip[] soundList;
+    [SerializeField] private SoundList[] soundList;
     public static SoundManager instance;
     private AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,7 +37,7 @@ public class SoundManager : MonoBehaviour
         {
             if (instance.audioSource != null)
             {
-                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType], instance.audioSource.volume);
+                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType].sounds[0], instance.audioSource.volume);
             }
             else
             {
@@ -56,7 +56,7 @@ public class SoundManager : MonoBehaviour
         {
             if (instance.audioSource != null)
             {
-                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType], volume);
+                instance.audioSource.PlayOneShot(instance.soundList[(int)soundType].sounds[0], volume);
             }
             else
             {
@@ -93,5 +93,5 @@ public class SoundManager : MonoBehaviour
 public struct SoundList
 {
     [HideInInspector] public string name;
-    [SerializeField] private AudioClip[] sounds;
+    [SerializeField] public AudioClip[] sounds;
 }

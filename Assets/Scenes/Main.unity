@@ -3586,12 +3586,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   soundList:
-  - {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
-  - {fileID: 8300000, guid: a235d590ef2a04d1b85b61ef4c21337c, type: 3}
-  - {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
-  - {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
-  - {fileID: 8300000, guid: 72127805eb2bc4e7fbf2e02eca266cfa, type: 3}
-  - {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
+  - name: POINT
+    sounds: []
+  - name: CRICKETS
+    sounds: []
+  - name: DOGBARK
+    sounds: []
+  - name: PLAYERWALK
+    sounds: []
+  - name: PLAYERRUN
+    sounds: []
+  - name: ENDGAME
+    sounds:
+    - {fileID: 8300000, guid: 89e6bc608da7b47d4914f3d9c2484e48, type: 3}
 --- !u!1001 &573799541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8793,6 +8800,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainManager
   pointSound: 0
   pointVolume: 0.5
+  exitSound: 5
+  exitVolume: 0.5
   player: {fileID: 1980717711}
   leftmostBorder: {fileID: 1950195581}
   rightmostBorder: {fileID: 598538042}
@@ -9299,6 +9308,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1683136182}
     m_Modifications:
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[0].name
+      value: POINT
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[1].name
+      value: CRICKETS
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[2].name
+      value: DOGBARK
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[3].name
+      value: PLAYERWALK
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[4].name
+      value: PLAYERRUN
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[5].name
+      value: ENDGAME
+      objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
       value: PointObject (1)
@@ -11358,6 +11391,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1683136182}
     m_Modifications:
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[0].name
+      value: POINT
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[1].name
+      value: CRICKETS
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[2].name
+      value: DOGBARK
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[3].name
+      value: PLAYERWALK
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[4].name
+      value: PLAYERRUN
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[5].name
+      value: ENDGAME
+      objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
       value: PointObject (2)
@@ -14507,6 +14564,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1683136182}
     m_Modifications:
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[0].name
+      value: POINT
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[1].name
+      value: CRICKETS
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[2].name
+      value: DOGBARK
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[3].name
+      value: PLAYERWALK
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[4].name
+      value: PLAYERRUN
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437821666544561685, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
+      propertyPath: soundList.Array.data[5].name
+      value: ENDGAME
+      objectReference: {fileID: 0}
     - target: {fileID: 6986722981952113311, guid: b21748f8764f4b240b1cdcb014e7240f, type: 3}
       propertyPath: m_Name
       value: PointObject (3)
