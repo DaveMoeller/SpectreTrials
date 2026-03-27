@@ -91,7 +91,7 @@ public class PlayerManager : MonoBehaviour
         if (collision.gameObject.name.Contains("LightSwitch"))
         {
             MainManager.Instance.SetObjectsVisible(true);
-            MainManager.Instance.CreatePointObjects();
+            MainManager.Instance.SetPointObjectsActive(true);
             Destroy(collision.gameObject, 0.1f);
         }
         if (collision.gameObject.name.Contains("WallPiece"))

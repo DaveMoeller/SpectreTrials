@@ -8848,8 +8848,8 @@ MonoBehaviour:
   eyes: {fileID: 1392173653}
   eyeMoveAmount: 0.03
   usePulseAcceleration: 0
-  pointObjectIncrementX: 0.25
-  pointObjectIncrementY: -0.25
+  pointObjectIncrementX: 0.5
+  pointObjectIncrementY: -0.5
   looseText: 'Sorry about your skills!
 
     Please try again to improve!
@@ -8861,6 +8861,7 @@ MonoBehaviour:
     Please play again soon!
 
     Game Over!'
+  pointObjects: []
 --- !u!4 &1233191729
 Transform:
   m_ObjectHideFlags: 0

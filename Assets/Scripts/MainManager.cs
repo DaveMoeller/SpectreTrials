@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -57,6 +58,10 @@ public class MainManager : MonoBehaviour
     public float pointObjectIncrementY = -1.0f;
     public string looseText = "Sorry about your skills!\nPlease try again to improve\nGame Over!";
     public string winText = "Great Job!\nPlease play again soon!\nGame Over!";
+
+    public GameObject[] pointObjects;
+    private int numberOfPointObjects = 0;
+
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -120,6 +125,7 @@ public class MainManager : MonoBehaviour
         }
         SetObjectsVisible(false);
         root = uiDocument.rootVisualElement;
+        CreatePointObjects();
     }
     public void SetObjectsVisible(bool visible)
     {
@@ -129,11 +135,11 @@ public class MainManager : MonoBehaviour
             for (int i = 0; i < tagsToTurnOnForSwitch.Length; i++)
             {
                 //Get the objects with tag
-                GameObject[] ObjectsToStitchOff = GameObject.FindGameObjectsWithTag(tagsToTurnOnForSwitch[i]);
-                for (int j = 0; j < ObjectsToStitchOff.Length; j++)
+                GameObject[] ObjectsToSwitchOff = GameObject.FindGameObjectsWithTag(tagsToTurnOnForSwitch[i]);
+                for (int j = 0; j < ObjectsToSwitchOff.Length; j++)
                 {
                     //Turn off
-                    SpriteRenderer sr = ObjectsToStitchOff[j].GetComponent<SpriteRenderer>();
+                    SpriteRenderer sr = ObjectsToSwitchOff[j].GetComponent<SpriteRenderer>();
                     sr.enabled = visible;
                 }
             }
@@ -318,28 +324,54 @@ public class MainManager : MonoBehaviour
         float x, y;
         float incrementX = pointObjectIncrementX;
         float incrementY = pointObjectIncrementY;
+        //ToDo: Remove hard coding for point object box
         float startX = -14.0f, startY = 30.75f;
         float endX = 13.0f, endY = 5.25f;
         Vector3 poScale = pointObject.transform.localScale;
         Vector2 boxSize = new(poScale.x, poScale.y);
-
+        //Debug.Log($"GameWorld.transform:{gameWorld.transform}");
+        //Allocate array size based on maximum points
+        int maxArraySize = (int)Math.Ceiling(((endX - startX) / incrementX) * ((endY - startY) / incrementY));
+        pointObjects = new GameObject[maxArraySize];
+        //Resize array based on actual results
+        bool success = false;
         for (x = startX; x <= endX; x += incrementX)
         {
             for (y = startY; y >= endY; y += incrementY)
             {
                 Vector2 pos = new(x, y);
-                //x = -14.75f; y = 19.25f;
-                Debug.Log($"Trying to instantiate at {pos}");
+                //Debug.Log($"Trying to instantiate at {pos}");
                 if (!Physics2D.OverlapBox(pos, boxSize, 0.0f))
                 {
-                    Instantiate(pointObject, pos, Quaternion.identity, gameWorld.transform);
-                    Debug.Log("Object spawned in empty space!");
+                    GameObject newGo;
+                    newGo = Instantiate(pointObject, pos, Quaternion.identity, gameWorld.transform);
+                    pointObjects[numberOfPointObjects] = newGo;
+                    numberOfPointObjects++;
+                    success = true;
+                    //Debug.Log("Object spawned in empty space!");
                 }
                 else
                 {
-                    Debug.Log("Space occupied, cannot spawn.");
+                    //Debug.Log("Space occupied, cannot spawn.");
                 }
             }
+            if (success)
+            {
+                //Make sure not next to each other - double space
+                x += incrementX * 2.0f;
+                y += incrementY * 2.0f;
+                success = false;
+            }
+        }
+        //Resize array based on actual results
+        Array.Resize(ref pointObjects, numberOfPointObjects);
+    }
+    public void SetPointObjectsActive(bool active)
+    {
+        //GameObject[] pointObjects = GameObject.FindGameObjectsWithTag("PointObject");
+        for (int i = 0; i < numberOfPointObjects; i++)
+        {
+            pointObjects[i].SetActive(active);
         }
     }
     public void IncrementScore(int score = 1)
