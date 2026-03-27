@@ -5169,7 +5169,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4542341743045022058, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_Mass
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4542341743045022058, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_BodyType
@@ -5181,7 +5181,7 @@ PrefabInstance:
       objectReference: {fileID: 6200000, guid: 7a83fb4b60a5f054bbe27c3e6baf6e98, type: 2}
     - target: {fileID: 4542341743045022058, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_GravityScale
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4542341743045022058, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LinearDamping

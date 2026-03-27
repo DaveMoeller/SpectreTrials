@@ -168,6 +168,7 @@ public class MainManager : MonoBehaviour
             if (isPressed)
             {
                 Debug.Log("Start Selected!");
+                Time.timeScale = 1.0f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 return;
             }
@@ -196,7 +197,7 @@ public class MainManager : MonoBehaviour
                 cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
             }
         }
-        isPressed = controls.GamePlay.GameEnd.IsPressed();
+        isPressed = controls.GamePlay.GameEnd.WasPressedThisFrame();
         if (isPressed)
         {
             Debug.Log("Game End Selected!");
@@ -356,37 +357,33 @@ public class MainManager : MonoBehaviour
     }
     public void EndGame()
     {
-        // Turn off GameWorld
-
-        gameWorld.SetActive(false);
         int numberOfPointObjectsLeft = GameObject.FindGameObjectsWithTag("PointObject").Length;
         // Display GameOverText
         //If points left then loose, else win
 
+        gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
         if (numberOfPointObjectsLeft > 0)
         {
 
-            gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
             gameOverText.text = looseText;
             SoundManager.PlaySound(SoundType.ENDGAMELOOSE);
 
         }
         else
         {
-            gameOverText = uiDocument.rootVisualElement.Q<Label>("GameOverText");
             gameOverText.text = winText;
             SoundManager.PlaySound(SoundType.ENDGAMEWIN);
 
         }
+        // Turn off GameWorld
+        gameWorld.SetActive(false);
+        // GameOverText
 
         gameOverText.visible = true;
 
-
-
-        // GameOverText
 #if UNITY_EDITOR
+        Time.timeScale = 0.0f;
         if (autoBackToEditor)
-
         {
             EditorApplication.isPlaying = false;
         }
