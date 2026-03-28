@@ -68,6 +68,7 @@ public class PlayerManager : MonoBehaviour
             //Remove container
             Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
 
+ 
         }
         if (collision.gameObject.CompareTag("GuardDog"))
         {
@@ -94,6 +95,7 @@ public class PlayerManager : MonoBehaviour
             MainManager.Instance.SetObjectsVisible(true);
             MainManager.Instance.SetPointObjectsActive(true);
             Destroy(collision.gameObject, 0.1f);
+            //collision.gameObject.SetActive(false);
         }
         if (collision.gameObject.name.Contains("WallPiece"))
         {

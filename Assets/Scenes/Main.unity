@@ -8863,6 +8863,7 @@ MonoBehaviour:
 
     Game Over!'
   pointObjects: []
+  playerLocators: {fileID: 844548419}
 --- !u!4 &1233191729
 Transform:
   m_ObjectHideFlags: 0

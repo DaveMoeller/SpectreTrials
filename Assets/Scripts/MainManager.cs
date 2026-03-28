@@ -8,9 +8,7 @@ using UnityEngine.UIElements;
 public class MainManager : MonoBehaviour
 {
     public SoundType pointSound;
-    [Range(0.0f, 1.0f)] public float pointVolume = 0.5f;
     public SoundType exitSound;
-    [Range(0.0f, 1.0f)] public float exitVolume = 0.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static MainManager Instance;
     private static PlayerControl controls; // Reference to the generated class
@@ -61,7 +59,8 @@ public class MainManager : MonoBehaviour
 
     public GameObject[] pointObjects;
     private int numberOfPointObjects = 0;
-
+    [Tooltip("Player Locator GameObject")]
+    public GameObject playerLocators;
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -77,21 +76,26 @@ public class MainManager : MonoBehaviour
         //Debug.Log("MainManager gameObject.name: " + gameObject.name);
         if (Instance != null)
         {
+            //CreatePointObjects();
             return;
         }
         else
         {
             Instance = this;
             controls = new PlayerControl();
-            DontDestroyOnLoad(Instance); // same as GameObject
+            //DontDestroyOnLoad(Instance); // same as GameObject
 
         }
+        SetObjectsVisible(false);
+        root = uiDocument.rootVisualElement;
+        CreatePointObjects();
     }
     void Start()
     {
         playerRB = player.GetComponent<Rigidbody2D>();
         timeText = uiDocument.rootVisualElement.Q<Label>("TimeText");
         scoreText = uiDocument.rootVisualElement.Q<Label>("ScoreText");
+        SetObjectsVisible(false);
         //Find all starting locations
         startingLocations = GameObject.FindGameObjectsWithTag(tagToFind);
         if (startingLocations.Length > 0)
@@ -123,10 +127,7 @@ public class MainManager : MonoBehaviour
         {
             cameraPlayer = m_cameraPlayer;
         }
-        SetObjectsVisible(false);
-        root = uiDocument.rootVisualElement;
-        CreatePointObjects();
-    }
+     }
     public void SetObjectsVisible(bool visible)
     {
         //Switch objects with tags off - to be turned on later with object hit
@@ -189,12 +190,14 @@ public class MainManager : MonoBehaviour
                     cameraMainOn = false;
                     cameraMain.gameObject.SetActive(false);
                     cameraPlayer.gameObject.SetActive(true);
+                    playerLocators.SetActive(false);
                 }
                 else
                 {
                     cameraMainOn = true;
                     cameraPlayer.gameObject.SetActive(false);
                     cameraMain.gameObject.SetActive(true);
+                    playerLocators.SetActive(true);
 
                 }
             }
@@ -238,21 +241,6 @@ public class MainManager : MonoBehaviour
             Debug.Log($"PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
             //move eyes
         }
-        /*
-        if (controls.Move.MoveLeft.WasPressedThisFrame())
-        {
-            //eyes.transform.position + 
-            eyes.transform.position = new Vector3(-eyeMoveAmount, 0);
-
-        }
-
-        if (controls.Move.MoveRight.WasPressedThisFrame())
-        {
-            //eyes.transform.position + 
-            eyes.transform.position = new Vector3(eyeMoveAmount, 0);
-
-        }
-        */
         isPressed = controls.Move.MoveRight.IsPressed();
         if (isPressed)
         {
@@ -359,7 +347,7 @@ public class MainManager : MonoBehaviour
             {
                 //Make sure not next to each other - double space
                 x += incrementX * 2.0f;
-                y += incrementY * 2.0f;
+                //y += incrementY * 2.0f;
                 success = false;
             }
         }
