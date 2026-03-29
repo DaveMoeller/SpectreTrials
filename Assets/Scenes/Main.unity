@@ -1361,14 +1361,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1425810061}
     m_Modifications:
     - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.75
       objectReference: {fileID: 0}
@@ -8825,9 +8817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainManager
   pointSound: 0
-  pointVolume: 1
   exitSound: 5
-  exitVolume: 1
   player: {fileID: 1980717711}
   leftmostBorder: {fileID: 1950195581}
   rightmostBorder: {fileID: 598538042}

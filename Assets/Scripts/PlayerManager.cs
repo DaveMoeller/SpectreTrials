@@ -47,7 +47,6 @@ public class PlayerManager : MonoBehaviour
             //Disable parent containing switch and door blocker
             //collision.gameObject.transform.parent.gameObject.SetActive(false);
             //Get the child particle system
-            //collision.gameObject.
             //Set PS active
             //Destroy parent object after explosion
             float durationPS = 2.0f;
@@ -95,11 +94,9 @@ public class PlayerManager : MonoBehaviour
             MainManager.Instance.SetObjectsVisible(true);
             MainManager.Instance.SetPointObjectsActive(true);
             Destroy(collision.gameObject, 0.1f);
-            //collision.gameObject.SetActive(false);
-        }
+         }
         if (collision.gameObject.name.Contains("WallPiece"))
         {
-            //Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
             //Change the color
             //collision.gameObject
             if (collision.gameObject.TryGetComponent<SpriteRenderer>(out var renderer))

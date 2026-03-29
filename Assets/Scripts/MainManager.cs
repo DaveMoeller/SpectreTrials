@@ -127,7 +127,7 @@ public class MainManager : MonoBehaviour
         {
             cameraPlayer = m_cameraPlayer;
         }
-     }
+    }
     public void SetObjectsVisible(bool visible)
     {
         //Switch objects with tags off - to be turned on later with object hit
@@ -245,9 +245,6 @@ public class MainManager : MonoBehaviour
         if (isPressed)
         {
             Debug.Log("MoveRight pressed!");
-            //playerRB.linearVelocityX = forceToApply;
-            //playerRB.linearVelocityX = -deltaMovement;
-            //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
             Vector2 newDir;
             if (usePulseAcceleration)
             {
@@ -266,9 +263,6 @@ public class MainManager : MonoBehaviour
         if (isPressed)
         {
             Debug.Log("MoveUp pressed!");
-            //playerRB.linearVelocityX = forceToApply;
-            //playerRB.linearVelocityX = -deltaMovement;
-            //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
             Vector2 newDir;
             if (usePulseAcceleration)
             {
@@ -287,9 +281,6 @@ public class MainManager : MonoBehaviour
         if (isPressed)
         {
             Debug.Log("MoveDown pressed!");
-            //playerRB.linearVelocityX = forceToApply;
-            //playerRB.linearVelocityX = -deltaMovement;
-            //playerRB.AddForceX(-deltaMovement, ForceMode2D.Impulse);
             Vector2 newDir;
             if (usePulseAcceleration)
             {
@@ -319,9 +310,10 @@ public class MainManager : MonoBehaviour
         Vector2 boxSize = new(poScale.x, poScale.y);
         //Debug.Log($"GameWorld.transform:{gameWorld.transform}");
         //Allocate array size based on maximum points
-        int maxArraySize = (int)Math.Ceiling(((endX - startX) / incrementX) * ((endY - startY) / incrementY));
+        //Debug.Log($"Point Object Bounding Box: [{startX}, {startY}, {endX}, {endY}]");
+        int maxArraySize = Math.Abs((int)Math.Ceiling(((endX - startX) / incrementX) * ((endY - startY) / incrementY)));
         pointObjects = new GameObject[maxArraySize];
-        //Resize array based on actual results
+        //Resize array based on actual results.
         bool success = false;
         for (x = startX; x <= endX; x += incrementX)
         {

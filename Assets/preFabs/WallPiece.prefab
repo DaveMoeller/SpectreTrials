@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5920401464557400365}
   - component: {fileID: 7558153104484926915}
   - component: {fileID: 4542341743045022058}
-  - component: {fileID: -7762689537967704958}
   - component: {fileID: 851448324829143166}
   m_Layer: 0
   m_Name: WallPiece
@@ -28,9 +27,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8162485002744491629}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 12, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,18 +120,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-7762689537967704958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8162485002744491629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b1876d723f6ae24c829a21280eff935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WallManager
 --- !u!61 &851448324829143166
 BoxCollider2D:
   m_ObjectHideFlags: 0
