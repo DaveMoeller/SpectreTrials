@@ -61,6 +61,7 @@ public class MainManager : MonoBehaviour
     private int numberOfPointObjects = 0;
     [Tooltip("Player Locator GameObject")]
     public GameObject playerLocators;
+    public GameObject[] pointObjectsBoundingBoxes;
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -301,47 +302,74 @@ public class MainManager : MonoBehaviour
     {
         //Instantiate point objects in gamespace
         float x, y;
+        int maxArraySize;
         float incrementX = pointObjectIncrementX;
         float incrementY = pointObjectIncrementY;
         //ToDo: Remove hard coding for point object box
-        float startX = -14.0f, startY = 30.75f;
-        float endX = 13.0f, endY = 5.25f;
-        Vector3 poScale = pointObject.transform.localScale;
-        Vector2 boxSize = new(poScale.x, poScale.y);
-        //Debug.Log($"GameWorld.transform:{gameWorld.transform}");
-        //Allocate array size based on maximum points
-        //Debug.Log($"Point Object Bounding Box: [{startX}, {startY}, {endX}, {endY}]");
-        int maxArraySize = Math.Abs((int)Math.Ceiling(((endX - startX) / incrementX) * ((endY - startY) / incrementY)));
-        pointObjects = new GameObject[maxArraySize];
-        //Resize array based on actual results.
-        bool success = false;
-        for (x = startX; x <= endX; x += incrementX)
+        for (int i = 0; i < pointObjectsBoundingBoxes.Length; i++)
         {
-            for (y = startY; y >= endY; y += incrementY)
+            //Find max and min of box
+            float startX, startY;
+            float endX, endY;
+            //Calculate
+            startX = pointObjectsBoundingBoxes[i].transform.position.x -
+                (pointObjectsBoundingBoxes[i].transform.localScale.x / 2.0f);
+            startY = pointObjectsBoundingBoxes[i].transform.position.y +
+                (pointObjectsBoundingBoxes[i].transform.localScale.y / 2.0f);
+            endX = pointObjectsBoundingBoxes[i].transform.position.x +
+                 (pointObjectsBoundingBoxes[i].transform.localScale.x / 2.0f);
+            endY = pointObjectsBoundingBoxes[i].transform.position.y -
+                 (pointObjectsBoundingBoxes[i].transform.localScale.y / 2.0f);
+            //Destroy bounding box so logic does not think something is there
+            Destroy(pointObjectsBoundingBoxes[i]);
+            Vector3 poScale = pointObject.transform.localScale;
+            Vector2 boxSize = new(poScale.x, poScale.y);
+            //Debug.Log($"GameWorld.transform:{gameWorld.transform}");
+            //Allocate array size based on maximum points
+            Debug.Log($"Point Object Bounding Box: [{startX}, {startY}, {endX}, {endY}]");
+            maxArraySize = Math.Abs((int)Math.Ceiling(((endX - startX) / incrementX) * ((endY - startY) / incrementY)));
+            if (i == 0)
             {
-                Vector2 pos = new(x, y);
-                //Debug.Log($"Trying to instantiate at {pos}");
-                if (!Physics2D.OverlapBox(pos, boxSize, 0.0f))
+                pointObjects = new GameObject[maxArraySize];
+            }
+            else
+            {
+                //Resize array based on actual results
+                maxArraySize += numberOfPointObjects;
+                Array.Resize(ref pointObjects, maxArraySize);
+
+            }
+            //Resize array based on actual results.
+            bool success = false;
+            for (x = startX; x <= endX; x += incrementX)
+            {
+                for (y = startY; y >= endY; y += incrementY)
                 {
-                    GameObject newGo;
-                    newGo = Instantiate(pointObject, pos, Quaternion.identity, gameWorld.transform);
-                    pointObjects[numberOfPointObjects] = newGo;
-                    numberOfPointObjects++;
-                    success = true;
-                    //Debug.Log("Object spawned in empty space!");
+                    Vector2 pos = new(x, y);
+                    //Debug.Log($"Trying to instantiate at {pos}");
+                    if (!Physics2D.OverlapBox(pos, boxSize, 0.0f))
+                    {
+                        GameObject newGo;
+                        newGo = Instantiate(pointObject, pos, Quaternion.identity, gameWorld.transform);
+                        pointObjects[numberOfPointObjects] = newGo;
+                        numberOfPointObjects++;
+                        success = true;
+                        //Debug.Log("Object spawned in empty space!");
+                    }
+                    else
+                    {
+                        //Debug.Log("Space occupied, cannot spawn.");
+                    }
                 }
-                else
+                if (success)
                 {
-                    //Debug.Log("Space occupied, cannot spawn.");
+                    //Make sure not next to each other - double space
+                    //x += incrementX * 2.0f;
+                    //y += incrementY * 2.0f;
+                    success = false;
                 }
             }
-            if (success)
-            {
-                //Make sure not next to each other - double space
-                x += incrementX * 2.0f;
-                //y += incrementY * 2.0f;
-                success = false;
-            }
+
         }
         //Resize array based on actual results
         Array.Resize(ref pointObjects, numberOfPointObjects);
