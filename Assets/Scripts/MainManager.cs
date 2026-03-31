@@ -175,9 +175,7 @@ public class MainManager : MonoBehaviour
             isPressed = controls.GamePlay.GameStart.IsPressed();
             if (isPressed)
             {
-                //Debug.Log("Start Selected!");
-                Time.timeScale = 1.0f;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                RestartGame();
                 return;
             }
             isPressed = controls.Camera.CameraButton.WasPressedThisFrame();
@@ -223,8 +221,8 @@ public class MainManager : MonoBehaviour
         if (isPressed)
         {
             //Debug.Log("MoveLeft pressed!");
-            player.transform.GetPositionAndRotation(out Vector3 pos, out _);
-            leftmostBorder.transform.GetPositionAndRotation(out Vector3 borderPos, out _);
+            player.transform.GetPositionAndRotation(out _, out _);
+            leftmostBorder.transform.GetPositionAndRotation(out _, out _);
             //Debug.Log($"pos: {pos}, borderPos: {borderPos}");
             Vector2 newDir;
             if (usePulseAcceleration)
@@ -297,6 +295,26 @@ public class MainManager : MonoBehaviour
             Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
 
+    }
+    public void RestartGame()
+    {
+        //Debug.Log("Start Selected!");
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+    public void PauseGame(bool pause = true)
+    {
+        if (pause)
+        {
+            Time.timeScale = 0.0f;
+
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+
+        }
     }
     public void CreatePointObjects()
     {
