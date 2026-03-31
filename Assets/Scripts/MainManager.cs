@@ -103,12 +103,12 @@ public class MainManager : MonoBehaviour
         {
             int randomStart = UnityEngine.Random.Range(0, startingLocations.Length - 1);
             // set player location to first start location
-            Debug.Log($"Setting starting position to: {startingLocations[randomStart].name}");
+            //Debug.Log($"Setting starting position to: {startingLocations[randomStart].name}");
             player.transform.SetPositionAndRotation(startingLocations[randomStart].transform.position, Quaternion.identity);
         }
         else
         {
-            Debug.LogError("No starting locations exist!");
+            //Debug.LogError("No starting locations exist!");
             return;
         }
         if (m_cameraMain == null)
@@ -175,7 +175,7 @@ public class MainManager : MonoBehaviour
             isPressed = controls.GamePlay.GameStart.IsPressed();
             if (isPressed)
             {
-                Debug.Log("Start Selected!");
+                //Debug.Log("Start Selected!");
                 Time.timeScale = 1.0f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 return;
@@ -183,7 +183,7 @@ public class MainManager : MonoBehaviour
             isPressed = controls.Camera.CameraButton.WasPressedThisFrame();
             if (isPressed)
             {
-                Debug.Log("Camera Toggle is pressed!");
+                //Debug.Log("Camera Toggle is pressed!");
                 if (cameraMainOn)
                 {
                     //Set the transform of camera above player
@@ -210,7 +210,7 @@ public class MainManager : MonoBehaviour
         isPressed = controls.GamePlay.GameEnd.WasPressedThisFrame();
         if (isPressed)
         {
-            Debug.Log("Game End Selected!");
+            //Debug.Log("Game End Selected!");
             EndGame();
         }
 
@@ -222,10 +222,10 @@ public class MainManager : MonoBehaviour
         isPressed = controls.Move.MoveLeft.IsPressed();//.Gameplay.GameStart.IsPressed();
         if (isPressed)
         {
-            Debug.Log("MoveLeft pressed!");
+            //Debug.Log("MoveLeft pressed!");
             player.transform.GetPositionAndRotation(out Vector3 pos, out _);
             leftmostBorder.transform.GetPositionAndRotation(out Vector3 borderPos, out _);
-            Debug.Log($"pos: {pos}, borderPos: {borderPos}");
+            //Debug.Log($"pos: {pos}, borderPos: {borderPos}");
             Vector2 newDir;
             if (usePulseAcceleration)
             {
