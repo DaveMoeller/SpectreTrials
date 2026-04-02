@@ -81,7 +81,7 @@ public class PlayerManager : MonoBehaviour
         {
             SoundManager.PlaySound(SoundType.DOGBARK);
 
-            Destroy(collision.gameObject,1.0f);
+            Destroy(collision.gameObject, 1.0f);
             MainManager.Instance.EndGame();
 
         }
@@ -134,7 +134,7 @@ public class PlayerManager : MonoBehaviour
             collider.enabled = false;
             ps.Play();
             //SoundManager.PlaySound(MainManager.Instance.pointSound, MainManager.Instance.pointVolume);
-            SoundManager.PlaySound(MainManager.Instance.pointSound);
+            SoundManager.PlaySound(SoundType.POINT);
             Destroy(collision.gameObject, durationPS);
 
         }
@@ -143,6 +143,6 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("Collision with Enemy!");
         }
 
-        }
-
     }
+
+}
