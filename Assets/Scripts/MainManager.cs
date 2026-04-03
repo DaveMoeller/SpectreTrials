@@ -312,7 +312,16 @@ public class MainManager : MonoBehaviour
             }
             Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
-
+        isPressed = controls.Camera.ZoomIn.WasPressedThisFrame();
+        if (isPressed)
+        {
+            ZoomCamera(true);
+        }
+        isPressed = controls.Camera.ZoomOut.WasPressedThisFrame();
+        if (isPressed)
+        {
+            ZoomCamera(false);
+        }
     }
     public void RestartGame()
     {
