@@ -73,7 +73,8 @@ public class PlayerManager : MonoBehaviour
         {
             //
             Debug.Log($"Collision with {collision.gameObject.name} Object!");
-
+            //Update player location to starting location
+            MainManager.Instance.MovePlayerToNewStartingLocation();
 
         }
 
@@ -141,6 +142,9 @@ public class PlayerManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("Collision with Enemy!");
+            //Update player location to starting location
+            MainManager.Instance.MovePlayerToNewStartingLocation();
+
         }
 
     }
