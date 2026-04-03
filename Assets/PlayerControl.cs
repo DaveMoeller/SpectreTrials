@@ -481,6 +481,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ZoomMouse"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""2f781f89-8d79-4393-889a-cbf4cc80927a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -527,6 +536,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""action"": ""ZoomOut"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e41994c-73cf-4b75-80c1-7ace5ba903ee"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ZoomMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -550,6 +570,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Camera_CameraButton = m_Camera.FindAction("CameraButton", throwIfNotFound: true);
         m_Camera_ZoomIn = m_Camera.FindAction("ZoomIn", throwIfNotFound: true);
         m_Camera_ZoomOut = m_Camera.FindAction("ZoomOut", throwIfNotFound: true);
+        m_Camera_ZoomMouse = m_Camera.FindAction("ZoomMouse", throwIfNotFound: true);
     }
 
     ~@PlayerControl()
@@ -893,6 +914,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Camera_CameraButton;
     private readonly InputAction m_Camera_ZoomIn;
     private readonly InputAction m_Camera_ZoomOut;
+    private readonly InputAction m_Camera_ZoomMouse;
     /// <summary>
     /// Provides access to input actions defined in input action map "Camera".
     /// </summary>
@@ -916,6 +938,10 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Camera/ZoomOut".
         /// </summary>
         public InputAction @ZoomOut => m_Wrapper.m_Camera_ZoomOut;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/ZoomMouse".
+        /// </summary>
+        public InputAction @ZoomMouse => m_Wrapper.m_Camera_ZoomMouse;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -951,6 +977,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @ZoomOut.started += instance.OnZoomOut;
             @ZoomOut.performed += instance.OnZoomOut;
             @ZoomOut.canceled += instance.OnZoomOut;
+            @ZoomMouse.started += instance.OnZoomMouse;
+            @ZoomMouse.performed += instance.OnZoomMouse;
+            @ZoomMouse.canceled += instance.OnZoomMouse;
         }
 
         /// <summary>
@@ -971,6 +1000,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @ZoomOut.started -= instance.OnZoomOut;
             @ZoomOut.performed -= instance.OnZoomOut;
             @ZoomOut.canceled -= instance.OnZoomOut;
+            @ZoomMouse.started -= instance.OnZoomMouse;
+            @ZoomMouse.performed -= instance.OnZoomMouse;
+            @ZoomMouse.canceled -= instance.OnZoomMouse;
         }
 
         /// <summary>
@@ -1104,5 +1136,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnZoomOut(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ZoomMouse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnZoomMouse(InputAction.CallbackContext context);
     }
 }

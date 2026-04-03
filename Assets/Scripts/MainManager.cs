@@ -2,6 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -92,6 +93,7 @@ public class MainManager : MonoBehaviour
         {
             Instance = this;
             controls = new PlayerControl();
+            controls.Camera.ZoomMouse.performed += OnScroll;
             //DontDestroyOnLoad(Instance); // same as GameObject
 
         }
@@ -222,23 +224,16 @@ public class MainManager : MonoBehaviour
                 cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
             }
         }
-        isPressed = controls.Camera.ZoomIn.WasPressedThisFrame();
-        if (isPressed)
-        {
-            ZoomCamera(true);
-        }
-        isPressed = controls.Camera.ZoomOut.WasPressedThisFrame();
-        if (isPressed)
-        {
-            ZoomCamera(false);
-        }
         isPressed = controls.GamePlay.GameEnd.WasPressedThisFrame();
         if (isPressed)
         {
             //Debug.Log("Game End Selected!");
             EndGame();
         }
-
+        if (controls.Camera.ZoomIn.WasPressedThisFrame())
+        {
+            ZoomCamera();
+        }
     }
 
     public void FixedUpdate()
@@ -357,11 +352,12 @@ public class MainManager : MonoBehaviour
         if (zoomIn)
         {
             cameraSize -= zoomIncrement;
-        } else
+        }
+        else
         {
             cameraSize += zoomIncrement;
         }
-         
+
 
         // Clamp the FOV so it doesn't go too far
         cameraSize = Mathf.Clamp(cameraSize, minSize, maxSize);
@@ -369,6 +365,24 @@ public class MainManager : MonoBehaviour
         //currentCamera.fieldOfView = fov;
         currentCamera.orthographicSize = cameraSize;
     }
+    public void OnScroll(InputAction.CallbackContext context)
+    {
+        Vector2 scrollValue = context.ReadValue<Vector2>();
+        // Positive for Up, Negative for Down
+        Debug.Log($"scrollValue.y:{scrollValue.y}");
+        if (scrollValue.y != 0)
+        {
+            if (scrollValue.y > 0)
+            {
+                ZoomCamera(true);
+            }
+            else
+            {
+                ZoomCamera(false);
+            }
+        }
+    }
+
     public void PauseGame(bool pause = true)
     {
         if (pause)
