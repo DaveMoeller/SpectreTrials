@@ -230,11 +230,7 @@ public class MainManager : MonoBehaviour
             //Debug.Log("Game End Selected!");
             EndGame();
         }
-        if (controls.Camera.ZoomIn.WasPressedThisFrame())
-        {
-            ZoomCamera();
-        }
-    }
+     }
 
     public void FixedUpdate()
     {
