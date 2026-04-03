@@ -67,11 +67,21 @@ public class PlayerManager : MonoBehaviour
             //Remove container
             Destroy(collision.gameObject.transform.parent.gameObject, 0.5f);
 
- 
+
         }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //
+            Debug.Log($"Collision with {collision.gameObject.name} Object!");
+
+
+        }
+
         if (collision.gameObject.CompareTag("GuardDog"))
         {
-            Destroy(collision.gameObject);
+            SoundManager.PlaySound(SoundType.DOGBARK);
+
+            Destroy(collision.gameObject, 1.0f);
             MainManager.Instance.EndGame();
 
         }
@@ -94,7 +104,7 @@ public class PlayerManager : MonoBehaviour
             MainManager.Instance.SetObjectsVisible(true);
             MainManager.Instance.SetPointObjectsActive(true);
             Destroy(collision.gameObject, 0.1f);
-         }
+        }
         if (collision.gameObject.name.Contains("WallPiece"))
         {
             //Change the color
@@ -124,9 +134,13 @@ public class PlayerManager : MonoBehaviour
             collider.enabled = false;
             ps.Play();
             //SoundManager.PlaySound(MainManager.Instance.pointSound, MainManager.Instance.pointVolume);
-            SoundManager.PlaySound(MainManager.Instance.pointSound);
+            SoundManager.PlaySound(SoundType.POINT);
             Destroy(collision.gameObject, durationPS);
 
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Collision with Enemy!");
         }
 
     }

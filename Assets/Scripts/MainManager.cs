@@ -2,13 +2,12 @@ using System;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class MainManager : MonoBehaviour
 {
-    public SoundType pointSound;
-    public SoundType exitSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static MainManager Instance;
     private static PlayerControl controls; // Reference to the generated class
@@ -29,23 +28,31 @@ public class MainManager : MonoBehaviour
     [Range(0.1f, 2.0f)]
     [Tooltip("Force to apply in direction using Impulse")]
     public float forceToApplyImpulse = 0.5f;
-    Rigidbody2D playerRB;
+    private Rigidbody2D playerRB;
     public UIDocument uiDocument;
     private Label timeText;
     private Label scoreText;
+    private Label highScoreText01;
     private float gameTimeInSeconds;
     private static Camera m_cameraMain = null;
     private static Camera m_cameraPlayer = null;
     public Camera cameraMain;
+    public float minCameraMainSize = 1.0f;
+    public float maxCameraMainSize = 25.0f;
+    public float cameraMainZoomIncrement = 1.0f;
     public Camera cameraPlayer;
+    public float minCameraPlayerSize = 1.0f;
+    public float maxCameraPlayerSize = 25.0f;
+    public float cameraPlayerZoomIncrement = 1.0f;
     private bool cameraMainOn = true;
     GameObject[] startingLocations;
     private int currentStartingLocation = 0;
     public String[] tagsToTurnOnForSwitch;
-    private readonly string tagToFind = "StartLocation";
+    private readonly string startingLocationTag = "StartLocation";
     [Tooltip("Object to hit and get points.")]
     public GameObject pointObject;
     private int CurrentScore = 0;
+    private int HighScore = 0;
     private VisualElement root;
     public GameObject eyes;
     public float eyeMoveAmount = 0.03f;
@@ -62,6 +69,8 @@ public class MainManager : MonoBehaviour
     [Tooltip("Player Locator GameObject")]
     public GameObject playerLocators;
     public GameObject[] pointObjectsBoundingBoxes;
+    private string highScoreKey;
+
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -84,6 +93,7 @@ public class MainManager : MonoBehaviour
         {
             Instance = this;
             controls = new PlayerControl();
+            controls.Camera.ZoomMouse.performed += OnScroll;
             //DontDestroyOnLoad(Instance); // same as GameObject
 
         }
@@ -96,21 +106,9 @@ public class MainManager : MonoBehaviour
         playerRB = player.GetComponent<Rigidbody2D>();
         timeText = uiDocument.rootVisualElement.Q<Label>("TimeText");
         scoreText = uiDocument.rootVisualElement.Q<Label>("ScoreText");
+        highScoreText01 = uiDocument.rootVisualElement.Q<Label>("HighScoreText01");
         SetObjectsVisible(false);
-        //Find all starting locations
-        startingLocations = GameObject.FindGameObjectsWithTag(tagToFind);
-        if (startingLocations.Length > 0)
-        {
-            int randomStart = UnityEngine.Random.Range(0, startingLocations.Length - 1);
-            // set player location to first start location
-            //Debug.Log($"Setting starting position to: {startingLocations[randomStart].name}");
-            player.transform.SetPositionAndRotation(startingLocations[randomStart].transform.position, Quaternion.identity);
-        }
-        else
-        {
-            //Debug.LogError("No starting locations exist!");
-            return;
-        }
+        MovePlayerToNewStartingLocation();
         if (m_cameraMain == null)
         {
             m_cameraMain = cameraMain;
@@ -128,6 +126,27 @@ public class MainManager : MonoBehaviour
         {
             cameraPlayer = m_cameraPlayer;
         }
+        highScoreKey = Application.productName + "_" + HighScore;
+        GetPlayerPrefs();
+        SetHighScoreText();
+    }
+    public void MovePlayerToNewStartingLocation()
+    {
+        //Find all starting locations
+        startingLocations = GameObject.FindGameObjectsWithTag(startingLocationTag);
+        if (startingLocations.Length > 0)
+        {
+            int randomStart = UnityEngine.Random.Range(0, startingLocations.Length - 1);
+            // set player location to first start location
+            //Debug.Log($"Setting starting position to: {startingLocations[randomStart].name}");
+            player.transform.SetPositionAndRotation(startingLocations[randomStart].transform.position, Quaternion.identity);
+        }
+        else
+        {
+            //Debug.LogError("No starting locations exist!");
+            return;
+        }
+
     }
     public void SetObjectsVisible(bool visible)
     {
@@ -211,8 +230,7 @@ public class MainManager : MonoBehaviour
             //Debug.Log("Game End Selected!");
             EndGame();
         }
-
-    }
+     }
 
     public void FixedUpdate()
     {
@@ -303,6 +321,64 @@ public class MainManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
+    private void ZoomCamera(bool zoomIn = true)
+    {
+        float minSize;
+        float maxSize;
+        float zoomIncrement;
+        Camera currentCamera;
+        if (cameraMainOn)
+        {
+            currentCamera = cameraMain;
+            minSize = minCameraMainSize;
+            maxSize = maxCameraMainSize;
+            zoomIncrement = cameraMainZoomIncrement;
+        }
+        else
+        {
+            currentCamera = cameraPlayer;
+            minSize = minCameraPlayerSize;
+            maxSize = maxCameraPlayerSize;
+            zoomIncrement = cameraPlayerZoomIncrement;
+        }
+        // Get the current camera size
+        float cameraSize = currentCamera.orthographicSize;
+
+        // Adjust size
+        if (zoomIn)
+        {
+            cameraSize -= zoomIncrement;
+        }
+        else
+        {
+            cameraSize += zoomIncrement;
+        }
+
+
+        // Clamp the FOV so it doesn't go too far
+        cameraSize = Mathf.Clamp(cameraSize, minSize, maxSize);
+
+        //currentCamera.fieldOfView = fov;
+        currentCamera.orthographicSize = cameraSize;
+    }
+    public void OnScroll(InputAction.CallbackContext context)
+    {
+        Vector2 scrollValue = context.ReadValue<Vector2>();
+        // Positive for Up, Negative for Down
+        Debug.Log($"scrollValue.y:{scrollValue.y}");
+        if (scrollValue.y != 0)
+        {
+            if (scrollValue.y > 0)
+            {
+                ZoomCamera(true);
+            }
+            else
+            {
+                ZoomCamera(false);
+            }
+        }
+    }
+
     public void PauseGame(bool pause = true)
     {
         if (pause)
@@ -400,14 +476,33 @@ public class MainManager : MonoBehaviour
             pointObjects[i].SetActive(active);
         }
     }
+    private void SavePlayerPrefs()
+    {
+        // Save high score and other scores
+        //SpectreTrials
+        PlayerPrefs.SetInt(highScoreKey, HighScore);
+        PlayerPrefs.Save();
+    }
+    private void GetPlayerPrefs()
+    {
+        HighScore = PlayerPrefs.GetInt(highScoreKey, 0);
+
+    }
     public void IncrementScore(int score = 1)
     {
         CurrentScore += score;
+        if (CurrentScore >= HighScore) HighScore = CurrentScore;
         UpdateScoreText();
     }
     public void UpdateScoreText()
     {
         scoreText.text = $"Score:  {CurrentScore}";
+        SetHighScoreText();
+    }
+    private void SetHighScoreText()
+    {
+        highScoreText01.text = $"High Score: {HighScore}";
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -415,6 +510,7 @@ public class MainManager : MonoBehaviour
     }
     public void EndGame()
     {
+        SavePlayerPrefs();
         int numberOfPointObjectsLeft = GameObject.FindGameObjectsWithTag("PointObject").Length;
         // Display GameOverText
         //If points left then loose, else win

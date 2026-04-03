@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
         //Get location of enemy and player
         Vector2 playerPos = player.transform.position;
         Vector2 enemyPos = transform.position;
-        Vector2 dir = calculateMoveVector(playerPos, enemyPos);
+        Vector2 dir = CalculateMoveVector(playerPos, enemyPos);
 
         //Calculate vector
         //Debug.Log($"playerPos:{playerPos}");
@@ -44,16 +44,12 @@ public class EnemyManager : MonoBehaviour
         //AddForce
         //Instance.enemyRB.AddForce((enemySpeed * Time.fixedDeltaTime * dir), ForceMode2D.Force);
         //Instance.enemyRB.linearVelocity = (enemySpeed * Time.fixedDeltaTime * dir);
+        //Rigidbody2D.MovePosition()
         Instance.enemyRB.linearVelocity = (enemySpeed * dir);
     }
-    private Vector2 calculateMoveVector(Vector2 pos, Vector2 pos1)
+    private Vector2 CalculateMoveVector(Vector2 pos, Vector2 pos1)
     {
         return (pos - pos1).normalized;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
