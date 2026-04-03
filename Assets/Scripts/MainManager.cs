@@ -36,7 +36,13 @@ public class MainManager : MonoBehaviour
     private static Camera m_cameraMain = null;
     private static Camera m_cameraPlayer = null;
     public Camera cameraMain;
+    public float minCameraMainSize = 1.0f;
+    public float maxCameraMainSize = 25.0f;
+    public float cameraMainZoomIncrement = 1.0f;
     public Camera cameraPlayer;
+    public float minCameraPlayerSize = 1.0f;
+    public float maxCameraPlayerSize = 25.0f;
+    public float cameraPlayerZoomIncrement = 1.0f;
     private bool cameraMainOn = true;
     GameObject[] startingLocations;
     private int currentStartingLocation = 0;
@@ -63,6 +69,7 @@ public class MainManager : MonoBehaviour
     public GameObject playerLocators;
     public GameObject[] pointObjectsBoundingBoxes;
     private string highScoreKey;
+
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -215,6 +222,16 @@ public class MainManager : MonoBehaviour
                 cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
             }
         }
+        isPressed = controls.Camera.ZoomIn.WasPressedThisFrame();
+        if (isPressed)
+        {
+            ZoomCamera(true);
+        }
+        isPressed = controls.Camera.ZoomOut.WasPressedThisFrame();
+        if (isPressed)
+        {
+            ZoomCamera(false);
+        }
         isPressed = controls.GamePlay.GameEnd.WasPressedThisFrame();
         if (isPressed)
         {
@@ -312,6 +329,45 @@ public class MainManager : MonoBehaviour
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+    }
+    private void ZoomCamera(bool zoomIn = true)
+    {
+        float minSize;
+        float maxSize;
+        float zoomIncrement;
+        Camera currentCamera;
+        if (cameraMainOn)
+        {
+            currentCamera = cameraMain;
+            minSize = minCameraMainSize;
+            maxSize = maxCameraMainSize;
+            zoomIncrement = cameraMainZoomIncrement;
+        }
+        else
+        {
+            currentCamera = cameraPlayer;
+            minSize = minCameraPlayerSize;
+            maxSize = maxCameraPlayerSize;
+            zoomIncrement = cameraPlayerZoomIncrement;
+        }
+        // Get the current camera size
+        float cameraSize = currentCamera.orthographicSize;
+
+        // Adjust size
+        if (zoomIn)
+        {
+            cameraSize -= zoomIncrement;
+        } else
+        {
+            cameraSize += zoomIncrement;
+        }
+         
+
+        // Clamp the FOV so it doesn't go too far
+        cameraSize = Mathf.Clamp(cameraSize, minSize, maxSize);
+
+        //currentCamera.fieldOfView = fov;
+        currentCamera.orthographicSize = cameraSize;
     }
     public void PauseGame(bool pause = true)
     {
