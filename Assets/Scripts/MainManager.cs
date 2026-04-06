@@ -70,8 +70,12 @@ public class MainManager : MonoBehaviour
     public GameObject playerLocators;
     public GameObject[] pointObjectsBoundingBoxes;
     private string highScoreKey;
-
+    public GameLevels gameLevel = GameLevels.BEGINNER;
+    public GameObject[] beginnerGameObjectsToDisable;
+    public GameObject[] intermediateGameObjectsToDisable;
     public PlayerControl PlayerControlsShared { get { return controls; } }
+    private Button mainMenuButton;
+
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
@@ -103,6 +107,44 @@ public class MainManager : MonoBehaviour
     }
     void Start()
     {
+        if (GameData.Instance == null)
+        {
+            Debug.LogError("GameData not defined. Enter thru Menu!");
+        }
+        else
+        {
+            gameLevel = GameData.Instance.Level;
+            Debug.Log($"Game Level: {gameLevel}");
+        }
+
+        //Disable challenges based on level
+        switch (gameLevel)
+        {
+            case GameLevels.BEGINNER:
+                {
+                    //Disable BEGINNER items
+                    for(int i = 0;i< beginnerGameObjectsToDisable.Length;i++)
+                    {
+                        beginnerGameObjectsToDisable[i].SetActive(false);
+                    }
+                    break;
+                }
+            case GameLevels.INTERMEDIATE:
+                {
+                    //intermediateGameObjectsToDisable
+                    for (int i = 0; i < intermediateGameObjectsToDisable.Length; i++)
+                    {
+                        intermediateGameObjectsToDisable[i].SetActive(false);
+                    }
+                    break;
+                }
+            default:
+                {
+                    //everything enabled
+                    break;
+                }
+        }
+
         playerRB = player.GetComponent<Rigidbody2D>();
         timeText = uiDocument.rootVisualElement.Q<Label>("TimeText");
         scoreText = uiDocument.rootVisualElement.Q<Label>("ScoreText");
@@ -129,6 +171,20 @@ public class MainManager : MonoBehaviour
         highScoreKey = Application.productName + "_" + HighScore;
         GetPlayerPrefs();
         SetHighScoreText();
+        mainMenuButton = root.Q<Button>("MainMenuButton"); // Use the name you set in UI Builder
+        if (mainMenuButton != null)
+        {
+            if (Instance != null)
+            {
+                mainMenuButton.clicked += GoToMainMenu;
+            }
+            else
+            {
+                Debug.LogError("Instance is null");
+            }
+
+        }
+
     }
     public void MovePlayerToNewStartingLocation()
     {
@@ -330,6 +386,12 @@ public class MainManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
+    public void GoToMainMenu()
+    {
+        //Debug.Log("Main Menu Selected!");
+        SceneManager.LoadScene(0);
+
+    }
     private void ZoomCamera(bool zoomIn = true)
     {
         float minSize;
@@ -429,7 +491,7 @@ public class MainManager : MonoBehaviour
             Vector2 boxSize = new(poScale.x, poScale.y);
             //Debug.Log($"GameWorld.transform:{gameWorld.transform}");
             //Allocate array size based on maximum points
-            Debug.Log($"Point Object Bounding Box: [{startX}, {startY}, {endX}, {endY}]");
+            //Debug.Log($"Point Object Bounding Box: [{startX}, {startY}, {endX}, {endY}]");
             maxArraySize = Math.Abs((int)Math.Ceiling(((endX - startX) / incrementX) * ((endY - startY) / incrementY)));
             if (i == 0)
             {

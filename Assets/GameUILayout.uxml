@@ -9,9 +9,10 @@
     <ui:Label text="HighScore 02" name="HighScoreText02" style="font-size: 16px; padding-right: 11px; margin-left: 27px;"/>
     <ui:Label text="HighScore 03" name="HighScoreText03" style="font-size: 16px; padding-right: 11px; margin-left: 27px;"/>
     <ui:Label text="Game Over!&#10;Better Luck Next Time!" name="GameOverText" style="font-size: 40px; -unity-font-style: bold; -unity-text-outline-color: rgb(30, 122, 37); color: rgb(5, 184, 169); align-self: center; align-items: center; justify-content: flex-end; -unity-text-align: upper-center; visibility: hidden;"/>
-    <ui:GroupBox name="ButtonBox" style="align-items: center; align-self: flex-end; align-content: center; justify-content: center; translate: -66px -70px;">
+    <ui:GroupBox name="ButtonBox" style="align-items: center; align-self: flex-end; align-content: center; justify-content: center; translate: -66px -70px; margin-top: -75px;">
         <ui:Button text="Play" name="PlayBtn" style="justify-content: center; width: 80px; background-color: rgb(32, 190, 10); font-size: 18px; -unity-font-style: bold;"/>
         <ui:Button text="Pause" name="PauseBtn" style="justify-content: center; width: 80px; background-color: rgb(251, 250, 12); font-size: 18px; -unity-font-style: bold;"/>
         <ui:Button text="I am a Quitter" name="QuitBtn" style="justify-content: center; width: 80px; background-color: rgb(255, 0, 0); -unity-font-style: bold; font-size: 12px; flex-wrap: wrap; white-space: normal;"/>
+        <ui:Button text="Main Menu" name="MainMenuButton" style="justify-content: center; width: 80px; background-color: rgb(219, 0, 255); -unity-font-style: bold; font-size: 12px; flex-wrap: wrap; white-space: normal;"/>
     </ui:GroupBox>
 </ui:UXML>
