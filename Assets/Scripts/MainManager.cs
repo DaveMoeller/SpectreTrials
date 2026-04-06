@@ -74,6 +74,8 @@ public class MainManager : MonoBehaviour
     public GameObject[] beginnerGameObjectsToDisable;
     public GameObject[] intermediateGameObjectsToDisable;
     public PlayerControl PlayerControlsShared { get { return controls; } }
+    private Button mainMenuButton;
+
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
@@ -169,6 +171,20 @@ public class MainManager : MonoBehaviour
         highScoreKey = Application.productName + "_" + HighScore;
         GetPlayerPrefs();
         SetHighScoreText();
+        mainMenuButton = root.Q<Button>("MainMenuButton"); // Use the name you set in UI Builder
+        if (mainMenuButton != null)
+        {
+            if (Instance != null)
+            {
+                mainMenuButton.clicked += GoToMainMenu;
+            }
+            else
+            {
+                Debug.LogError("Instance is null");
+            }
+
+        }
+
     }
     public void MovePlayerToNewStartingLocation()
     {
@@ -368,6 +384,12 @@ public class MainManager : MonoBehaviour
         //Debug.Log("Start Selected!");
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+    public void GoToMainMenu()
+    {
+        //Debug.Log("Main Menu Selected!");
+        SceneManager.LoadScene(0);
 
     }
     private void ZoomCamera(bool zoomIn = true)
