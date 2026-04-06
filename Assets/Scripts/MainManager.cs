@@ -72,6 +72,7 @@ public class MainManager : MonoBehaviour
     private string highScoreKey;
     public GameLevels gameLevel = GameLevels.BEGINNER;
     public GameObject[] beginnerGameObjectsToDisable;
+    public GameObject[] intermediateGameObjectsToDisable;
     public PlayerControl PlayerControlsShared { get { return controls; } }
     void OnEnable()
     {
@@ -128,6 +129,11 @@ public class MainManager : MonoBehaviour
                 }
             case GameLevels.INTERMEDIATE:
                 {
+                    //intermediateGameObjectsToDisable
+                    for (int i = 0; i < intermediateGameObjectsToDisable.Length; i++)
+                    {
+                        intermediateGameObjectsToDisable[i].SetActive(false);
+                    }
                     break;
                 }
             default:

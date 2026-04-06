@@ -10029,6 +10029,9 @@ MonoBehaviour:
   gameLevel: 0
   beginnerGameObjectsToDisable:
   - {fileID: 45024143}
+  - {fileID: 1311817654}
+  intermediateGameObjectsToDisable:
+  - {fileID: 45024143}
 --- !u!4 &1233191729
 Transform:
   m_ObjectHideFlags: 0
