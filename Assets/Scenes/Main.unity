@@ -8970,7 +8970,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 11.8498745
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5920401464557400365, guid: ef31839b1bea3474b981da45c26d94d5, type: 3}
       propertyPath: m_LocalScale.y
@@ -10026,6 +10026,9 @@ MonoBehaviour:
   - {fileID: 1514268861}
   - {fileID: 1865360046}
   - {fileID: 66032439}
+  gameLevel: 0
+  beginnerGameObjectsToDisable:
+  - {fileID: 45024143}
 --- !u!4 &1233191729
 Transform:
   m_ObjectHideFlags: 0

@@ -2,8 +2,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(UIDocument))]
 public class MenuManager : MonoBehaviour
 {
     private static UIDocument uiDocument;
@@ -45,22 +47,22 @@ public class MenuManager : MonoBehaviour
         beginnerBtn = root.Q<Button>("beginnerBtn"); // Use the name you set in UI Builder
         if (beginnerBtn != null)
         {
-            beginnerBtn.clicked += (() =>OnAnyClickButton(beginnerBtn.name));
+            beginnerBtn.clicked += (() => OnAnyClickButton(beginnerBtn.name, GameLevels.BEGINNER));
         }
         intermediateBtn = root.Q<Button>("intermediateBtn"); // Use the name you set in UI Builder
         if (intermediateBtn != null)
         {
-            intermediateBtn.clicked += (() => OnAnyClickButton(intermediateBtn.name));
+            intermediateBtn.clicked += (() => OnAnyClickButton(intermediateBtn.name, GameLevels.INTERMEDIATE));
         }
         expertBtn = root.Q<Button>("expertBtn"); // Use the name you set in UI Builder
         if (expertBtn != null)
         {
-            expertBtn.clicked += (() => OnAnyClickButton(expertBtn.name));
+            expertBtn.clicked += (() => OnAnyClickButton(expertBtn.name, GameLevels.EXPERT));
         }
         exitBtn = root.Q<Button>("exitBtn"); // Use the name you set in UI Builder
         if (exitBtn != null)
         {
-            exitBtn.clicked += (() => OnAnyClickButton(exitBtn.name));
+            exitBtn.clicked += (() => OnAnyClickButton(exitBtn.name, GameLevels.QUITTER));
             exitBtn.clicked += OnExitClickButton;
         }
     }
@@ -68,12 +70,16 @@ public class MenuManager : MonoBehaviour
     {
         controls.Disable(); // Actions should be disabled when not in use
     }
-    public void OnAnyClickButton(string buttonName)
+    public void OnAnyClickButton(string buttonName, GameLevels gameLevel)
     {
         if (Application.isPlaying)
         {
-              Debug.Log("Button Name: " + buttonName);
+            Debug.Log("Button Name: " + buttonName + $"Game Level: {gameLevel}");
         }
+        GameData.Instance.Level = gameLevel;
+        //load the game
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(1);
     }
     public void OnExitClickButton()
     {
@@ -92,3 +98,4 @@ public class MenuManager : MonoBehaviour
         }
     }
 }
+
