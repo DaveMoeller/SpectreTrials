@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "MenuControl",
+    "maps": [
+        {
+            "name": "MenuButton",
+            "id": "f31af85c-d128-457e-8105-394d36c15922",
+            "actions": [
+                {
+                    "name": "ButtonAny",
+                    "type": "Button",
+                    "id": "1a7c040f-67ce-49d5-aac5-20324d9c9c41",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a7e90e6a-4b20-4b68-a18b-bfb865e86220",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ButtonAny",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
