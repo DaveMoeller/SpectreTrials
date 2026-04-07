@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"Player collision! Main Object: {collision.gameObject.name} Other Object: {collision.otherRigidbody.name}");
+        //Debug.Log($"Player collision! Main Object: {collision.gameObject.name} Other Object: {collision.otherRigidbody.name}");
         if (collision.gameObject.name == "DoorSwitchExit")
         {
             //Disable parent containing switch and door blocker
@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //
-            Debug.Log($"Collision with {collision.gameObject.name} Object!");
+            //Debug.Log($"Collision with {collision.gameObject.name} Object!");
             //Update player location to starting location
             MainManager.Instance.MovePlayerToNewStartingLocation();
 
@@ -141,7 +141,7 @@ public class PlayerManager : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Collision with Enemy!");
+            //Debug.Log("Collision with Enemy!");
             //Update player location to starting location
             MainManager.Instance.MovePlayerToNewStartingLocation();
 

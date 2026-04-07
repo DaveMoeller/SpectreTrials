@@ -52,7 +52,7 @@ public class ButtonManager : MonoBehaviour
 
     public void OnPlayButtonClicked()
     {
-        Debug.Log("Play Button Clicked!");
+        //Debug.Log("Play Button Clicked!");
         playButton.SetEnabled(false);
         // Add your custom logic here (e.g., load a new scene, open a panel, etc.)
         MainManager.Instance.RestartGame();

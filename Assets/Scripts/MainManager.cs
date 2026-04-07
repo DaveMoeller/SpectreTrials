@@ -114,7 +114,7 @@ public class MainManager : MonoBehaviour
         else
         {
             gameLevel = GameData.Instance.Level;
-            Debug.Log($"Game Level: {gameLevel}");
+            //Debug.Log($"Game Level: {gameLevel}");
         }
 
         //Disable challenges based on level
@@ -311,13 +311,13 @@ public class MainManager : MonoBehaviour
                 playerRB.AddForce(newDir, ForceMode2D.Force);
 
             }
-            Debug.Log($"PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
+            //Debug.Log($"PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
             //move eyes
         }
         isPressed = controls.Move.MoveRight.IsPressed();
         if (isPressed)
         {
-            Debug.Log("MoveRight pressed!");
+            //Debug.Log("MoveRight pressed!");
             Vector2 newDir;
             if (usePulseAcceleration)
             {
@@ -330,12 +330,12 @@ public class MainManager : MonoBehaviour
                 playerRB.AddForce(newDir, ForceMode2D.Force);
 
             }
-            Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
+            //Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
         isPressed = controls.Move.MoveUp.IsPressed();
         if (isPressed)
         {
-            Debug.Log("MoveUp pressed!");
+            //Debug.Log("MoveUp pressed!");
             Vector2 newDir;
             if (usePulseAcceleration)
             {
@@ -348,12 +348,12 @@ public class MainManager : MonoBehaviour
                 playerRB.AddForce(newDir, ForceMode2D.Force);
 
             }
-            Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
+            //Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
         isPressed = controls.Move.MoveDown.IsPressed();
         if (isPressed)
         {
-            Debug.Log("MoveDown pressed!");
+            //Debug.Log("MoveDown pressed!");
             Vector2 newDir;
             if (usePulseAcceleration)
             {
@@ -366,7 +366,7 @@ public class MainManager : MonoBehaviour
                 playerRB.AddForce(newDir, ForceMode2D.Force);
 
             }
-            Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
+            //Debug.Log($"PlayerManager:PlayerDirection: {newDir}, Velocity: {playerRB.linearVelocityX}");
         }
         isPressed = controls.Camera.ZoomIn.WasPressedThisFrame();
         if (isPressed)
@@ -436,7 +436,7 @@ public class MainManager : MonoBehaviour
     {
         Vector2 scrollValue = context.ReadValue<Vector2>();
         // Positive for Up, Negative for Down
-        Debug.Log($"scrollValue.y:{scrollValue.y}");
+        //Debug.Log($"scrollValue.y:{scrollValue.y}");
         if (scrollValue.y != 0)
         {
             if (scrollValue.y > 0)
@@ -577,7 +577,7 @@ public class MainManager : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision: " + collision.ToString());
+        //Debug.Log("Collision: " + collision.ToString());
     }
     public void EndGame()
     {
