@@ -13,4 +13,6 @@ The following are navigation keys:
 	* w/s Keys
 	* Up and down arrow keys
 	* Forward and back mouse keys
+- Navigation
+	* l Key - Jump to another predefined location
 
