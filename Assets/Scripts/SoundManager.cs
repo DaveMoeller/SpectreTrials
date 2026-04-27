@@ -34,7 +34,7 @@ public class SoundManager : MonoBehaviour
 
     public static void PlaySound(SoundType soundType)
     {
-        Debug.Log($"SoundType: {(int)soundType}");
+        //Debug.Log($"SoundType: {(int)soundType}");
         if (instance != null)
         {
             if (instance.audioSource != null)
@@ -53,7 +53,7 @@ public class SoundManager : MonoBehaviour
     }
     public static void PlaySound(SoundType soundType, float volume)
     {
-        Debug.Log($"SoundType: {(int)soundType}");
+        //Debug.Log($"SoundType: {(int)soundType}");
         if (instance != null)
         {
             if (instance.audioSource != null)
@@ -78,11 +78,11 @@ public class SoundManager : MonoBehaviour
     private void OnEnable()
     {
         string[] names = Enum.GetNames(typeof(SoundType));
-        Debug.Log($"names= {names}, length={names.Length}");
+        //Debug.Log($"names= {names}, length={names.Length}");
         Array.Resize(ref soundList, names.Length);
         for (int i = 0; i < soundList.Length; i++)
         {
-            Debug.Log($"names[{i}]= {names[i]}");
+            //Debug.Log($"names[{i}]= {names[i]}");
             soundList[i].name = names[i];
         }
     }

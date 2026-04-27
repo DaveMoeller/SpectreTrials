@@ -123,7 +123,7 @@ public class MainManager : MonoBehaviour
             case GameLevels.BEGINNER:
                 {
                     //Disable BEGINNER items
-                    for(int i = 0;i< beginnerGameObjectsToDisable.Length;i++)
+                    for (int i = 0; i < beginnerGameObjectsToDisable.Length; i++)
                     {
                         beginnerGameObjectsToDisable[i].SetActive(false);
                     }
@@ -286,7 +286,7 @@ public class MainManager : MonoBehaviour
             //Debug.Log("Game End Selected!");
             EndGame();
         }
-     }
+    }
 
     public void FixedUpdate()
     {
@@ -575,10 +575,6 @@ public class MainManager : MonoBehaviour
         highScoreText01.text = $"High Score: {HighScore}";
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //Debug.Log("Collision: " + collision.ToString());
-    }
     public void EndGame()
     {
         SavePlayerPrefs();
@@ -616,6 +612,6 @@ public class MainManager : MonoBehaviour
 #else
             Application.Quit();
 #endif
-        Debug.Log("Game Over!");
+        //Debug.Log("Game Over!");
     }
 }
