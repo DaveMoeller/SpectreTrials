@@ -1,7 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -27,9 +25,9 @@ public class MenuManager : MonoBehaviour
         titleLbl = root.Q<Label>("titleBtn");
         if (titleLbl != null)
         {
-            Debug.Log($"titleLbl.text: {titleLbl.text}");
+            //Debug.Log($"titleLbl.text: {titleLbl.text}");
             titleLbl.text = Application.productName;
-            Debug.Log($"titleLbl.text: {titleLbl.text}");
+            //Debug.Log($"titleLbl.text: {titleLbl.text}");
 
 
         }
@@ -72,10 +70,6 @@ public class MenuManager : MonoBehaviour
     }
     public void OnAnyClickButton(string buttonName, GameLevels gameLevel)
     {
-        if (Application.isPlaying)
-        {
-            Debug.Log("Button Name: " + buttonName + $"Game Level: {gameLevel}");
-        }
         GameData.Instance.Level = gameLevel;
         //load the game
         Time.timeScale = 1.0f;

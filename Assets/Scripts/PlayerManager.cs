@@ -146,7 +146,5 @@ public class PlayerManager : MonoBehaviour
             MainManager.Instance.MovePlayerToNewStartingLocation();
 
         }
-
     }
-
 }

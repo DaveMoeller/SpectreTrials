@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -528,10 +527,7 @@ public class MainManager : MonoBehaviour
                 }
                 if (success)
                 {
-                    //Make sure not next to each other - double space
-                    //x += incrementX * 2.0f;
-                    //y += incrementY * 2.0f;
-                    success = false;
+                     success = false;
                 }
             }
 

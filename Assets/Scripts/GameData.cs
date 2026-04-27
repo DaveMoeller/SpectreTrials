@@ -29,7 +29,5 @@ public class GameData : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(Instance.gameObject);
         }
-
     }
-   
 }

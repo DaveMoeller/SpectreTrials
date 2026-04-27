@@ -59,7 +59,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void OnPauseButtonClicked()
     {
-        Debug.Log("Pause Button Clicked!");
+        //Debug.Log("Pause Button Clicked!");
         if (gamePaused)
         {
             gamePaused = false;
@@ -77,7 +77,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void OnQuitButtonClicked()
     {
-        Debug.Log("Quit Button Clicked!");
+        //Debug.Log("Quit Button Clicked!");
         MainManager.Instance.EndGame();
         // Add your custom logic here (e.g., load a new scene, open a panel, etc.)
     }
