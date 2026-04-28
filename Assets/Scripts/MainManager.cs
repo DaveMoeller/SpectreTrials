@@ -1,13 +1,14 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+//using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static MainManager Instance;
     private static PlayerControl controls; // Reference to the generated class
     public GameObject player;
@@ -74,15 +75,53 @@ public class MainManager : MonoBehaviour
     public GameObject[] intermediateGameObjectsToDisable;
     public PlayerControl PlayerControlsShared { get { return controls; } }
     private Button mainMenuButton;
+    private Button pauseButton;
+    private Button quitButton;
+    private Button playButton;
+    private bool gamePaused = false;
 
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
+
+        //Set up buttons
+        playButton = root.Q<Button>("PlayBtn"); // Use the name you set in UI Builder
+        if (playButton != null)
+        {
+            playButton.clicked += OnPlayButtonClicked;
+        }
+        pauseButton = root.Q<Button>("PauseBtn"); // Use the name you set in UI Builder
+        if (pauseButton != null)
+        {
+            pauseButton.clicked += OnPauseButtonClicked;
+        }
+        quitButton = root.Q<Button>("QuitBtn"); // Use the name you set in UI Builder
+        if (quitButton != null)
+        {
+            quitButton.clicked += OnQuitButtonClicked;
+        }
+        mainMenuButton = root.Q<Button>("MainMenuBtn"); // Use the name you set in UI Builder
+        if (mainMenuButton != null)
+        {
+            mainMenuButton.clicked += GoToMainMenu;
+        }
     }
 
     void OnDisable()
     {
         controls.Disable(); // Actions should be disabled when not in use
+        if (playButton != null)
+        {
+            playButton.clicked -= OnPlayButtonClicked;
+        }
+        if (pauseButton != null)
+        {
+            pauseButton.clicked -= OnPauseButtonClicked;
+        }
+        if (quitButton != null)
+        {
+            quitButton.clicked -= OnQuitButtonClicked;
+        }
     }
     public void Awake()
     {
@@ -97,7 +136,6 @@ public class MainManager : MonoBehaviour
             Instance = this;
             controls = new PlayerControl();
             controls.Camera.ZoomMouse.performed += OnScroll;
-            //DontDestroyOnLoad(Instance); // same as GameObject
 
         }
         SetObjectsVisible(false);
@@ -170,20 +208,30 @@ public class MainManager : MonoBehaviour
         highScoreKey = Application.productName + "_" + HighScore;
         GetPlayerPrefs();
         SetHighScoreText();
-        mainMenuButton = root.Q<Button>("MainMenuButton"); // Use the name you set in UI Builder
-        if (mainMenuButton != null)
+
+    }
+    public void OnPlayButtonClicked()
+    {
+        //Debug.Log("Play Button Clicked!");
+        playButton.SetEnabled(false);
+         Instance.RestartGame();
+    }
+    public void OnPauseButtonClicked()
+    {
+        //Debug.Log("Pause Button Clicked!");
+        if (gamePaused)
         {
-            if (Instance != null)
-            {
-                mainMenuButton.clicked += GoToMainMenu;
-            }
-            else
-            {
-                Debug.LogError("Instance is null");
-            }
+            gamePaused = false;
+            pauseButton.text = "Break";
 
         }
-
+        else
+        {
+            gamePaused = true;
+            playButton.SetEnabled(true);
+            pauseButton.text = "Resume";
+        }
+        Instance.PauseGame(gamePaused);
     }
     public void MovePlayerToNewStartingLocation()
     {
@@ -279,11 +327,36 @@ public class MainManager : MonoBehaviour
                 cameraPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraPlayer.transform.position.z);
             }
         }
-        isPressed = controls.GamePlay.GameEnd.WasPressedThisFrame();
+        isPressed = controls.GamePlay.GameEnd.WasPressedThisFrame() || controls.GamePlay.Quit.WasPressedThisFrame();
         if (isPressed)
         {
             //Debug.Log("Game End Selected!");
             EndGame();
+        }
+        isPressed = controls.GamePlay.Menu.WasPressedThisFrame();
+        if (isPressed)
+        {
+            //Debug.Log("Menu Selected!");
+            GoToMainMenu();
+        }
+        isPressed = controls.GamePlay.Break.WasPressedThisFrame();
+        if (isPressed)
+        {
+            //Debug.Log("Break Selected!");
+            //Debug.Log("Pause Button Clicked!");
+            if (gamePaused)
+            {
+                gamePaused = false;
+                pauseButton.text = "Break";
+
+            }
+            else
+            {
+                gamePaused = true;
+                playButton.SetEnabled(true);
+                pauseButton.text = "Resume";
+            }
+            Instance.PauseGame(gamePaused);
         }
     }
 
@@ -454,13 +527,17 @@ public class MainManager : MonoBehaviour
         if (pause)
         {
             Time.timeScale = 0.0f;
-
         }
         else
         {
             Time.timeScale = 1.0f;
-
         }
+    }
+    public void OnQuitButtonClicked()
+    {
+        //Debug.Log("Quit Button Clicked!");
+        MainManager.Instance.EndGame();
+        // Add your custom logic here (e.g., load a new scene, open a panel, etc.)
     }
     public void CreatePointObjects()
     {
@@ -527,7 +604,7 @@ public class MainManager : MonoBehaviour
                 }
                 if (success)
                 {
-                     success = false;
+                    success = false;
                 }
             }
 
